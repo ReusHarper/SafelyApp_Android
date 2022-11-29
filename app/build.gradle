@@ -46,6 +46,7 @@ dependencies {
     def v_constLayout = "2.1.4"
     def v_junit = "4.13.2"
     def v_extJunit = "1.1.4"
+    def v_coordLayout = "1.1.0"
     def v_lottie = "5.2.0"
 
     // Android
@@ -53,6 +54,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$v_appCompat"
     implementation "com.google.android.material:material:$v_materialDesign"
     implementation "androidx.constraintlayout:constraintlayout:$v_constLayout"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$v_coordLayout"
     testImplementation "junit:junit:$v_junit"
     androidTestImplementation "androidx.test.ext:junit:$v_extJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$v_espressoCore"
