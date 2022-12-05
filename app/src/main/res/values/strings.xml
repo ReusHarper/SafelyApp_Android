@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SafelyApp</string>
+    <string name="btn_login">Inicia sesión</string>
+    <string name="btn_login_alt">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="btn_signup_alt">¿No tienes una cuenta? Crea una</string>
+    <string name="btn_signup">Crear cuenta</string>
+    <string name="view_title_login">Inicia Sesión</string>
+    <string name="view_title_signup">Crear cuenta</string>
+    <string name="input_email">Ingresa tu email</string>
+    <string name="input_password">Ingresa tu contraseña</string>
+    <string name="input_repeatPassword">Repite tu contraseña</string>
 </resources>
