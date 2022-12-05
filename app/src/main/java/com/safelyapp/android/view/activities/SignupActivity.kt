@@ -1,4 +1,4 @@
-package com.safelyapp.android
+package com.safelyapp.android.view.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,11 +25,8 @@ class SignupActivity : AppCompatActivity() {
         // Establecimiento parametros de UI
         binding.titleSignup.typeface = Typeface.createFromAsset(assets, "Fonts/Catamaran-Medium.ttf")
 
-        // Establecimiento de la UI de cada EditText de
-        // Email:
-        setUIEditText(binding.inputEmail, "Ingresa tu email prro", "ic_email_primary", null)
-        //setUIEditText( R.layout. , "Ingresa tu contraseña", "ic_lock_primary", null)
-        //binding.inputEmail.hint
+        // Ejemplo de establecimiento de la UI de cada EditText:
+        //setUIEditText(binding.inputEmail, "Ingresa tu email", "ic_email_primary", null)
     }
 
     // Colocacion de parametros iniciales de la UI de los EditText
@@ -47,7 +44,6 @@ class SignupActivity : AppCompatActivity() {
     fun getDrawableByFileName(context: Context, fileName: String): Drawable? {
         return ContextCompat.getDrawable(context, context.resources.getIdentifier(fileName, "drawable", context.packageName))
     }
-
 
     /*
     // Ciclo de vida
