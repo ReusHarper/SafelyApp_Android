@@ -60,10 +60,9 @@ dependencies {
     def v_lifecycle = "2.3.1"
     def v_lottie = "5.2.0"
 
-    // Android
+    // Default
     implementation "androidx.core:core-ktx:$v_core"
     implementation "androidx.appcompat:appcompat:$v_appCompat"
-    implementation "com.google.android.material:material:$v_materialDesign"
     implementation "androidx.constraintlayout:constraintlayout:$v_constLayout"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$v_coordLayout"
     implementation "androidx.navigation:navigation-fragment-ktx:$v_navigation"
@@ -72,6 +71,9 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$v_extJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$v_espressoCore"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$v_lifecycle"
+
+    // Material Design 3
+    implementation "com.google.android.material:material:$v_materialDesign"
 
     // Animations
     implementation "com.airbnb.android:lottie:$v_lottie"

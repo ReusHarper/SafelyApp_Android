@@ -8,18 +8,18 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.safelyapp.android.databinding.ActivitySignupBinding
+import com.safelyapp.android.databinding.FragmentSignupBinding
 
 
 class SignupActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySignupBinding
+    private lateinit var binding : FragmentSignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Inflacion de vista
-        binding = ActivitySignupBinding.inflate(layoutInflater)
+        binding = FragmentSignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Establecimiento parametros de UI

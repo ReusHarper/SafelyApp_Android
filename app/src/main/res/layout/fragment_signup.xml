@@ -49,65 +49,125 @@
         android:textColor="@color/primary_500"
         />
 
-    <EditText
-        android:id="@+id/input_email"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         layout="@layout/input_text_primary"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toStartOf="@+id/gl_right"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/gl_left"
-        app:layout_constraintTop_toBottomOf="@+id/title_signup"
+        android:layout_height="100dp"
+        android:layout_marginTop="35dp"
+        android:drawablePadding="12dp"
+        android:ems="50"
         android:hint="@string/input_email"
-        android:drawableStart="@drawable/ic_email_primary"
-        android:drawablePadding="12dp"/>
-
-    <EditText
-        android:id="@+id/input_password"
-        layout="@layout/input_text_primary"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:paddingTop="10dp"
+        android:textSize="14sp"
+        app:endIconMode="clear_text"
+        app:helperText="@string/ht_email"
+        app:helperTextTextColor="@color/primary_500"
+        app:helperTextEnabled="false"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
         app:layout_constraintEnd_toStartOf="@+id/gl_right"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/gl_left"
-        app:layout_constraintTop_toBottomOf="@+id/input_email"
+        app:layout_constraintTop_toBottomOf="@+id/title_signup">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_email_primary"
+            android:drawablePadding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_password"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        layout="@layout/input_text_primary"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:drawablePadding="12dp"
+        android:ems="50"
         android:hint="@string/input_password"
-        android:drawableStart="@drawable/ic_lock_primary"
-        android:drawablePadding="12dp"/>
-
-    <EditText
-        android:id="@+id/input_repeatPassword"
-        layout="@layout/input_text_primary"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
+        android:paddingTop="10dp"
+        android:textSize="14sp"
+        app:endIconMode="clear_text"
+        app:helperText="@string/ht_password"
+        app:helperTextTextColor="@color/primary_500"
+        app:helperTextEnabled="false"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:layout_constraintStart_toStartOf="@+id/gl_left"
         app:layout_constraintEnd_toStartOf="@+id/gl_right"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/til_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_lock_primary"
+            android:drawablePadding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_repeatpassword"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        layout="@layout/input_text_primary"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:drawablePadding="12dp"
+        android:ems="50"
+        android:hint="@string/input_repeatpassword"
+        android:paddingTop="10dp"
+        android:textSize="14sp"
+        app:endIconMode="clear_text"
+        app:helperText="@string/ht_repeatpassword"
+        app:helperTextTextColor="@color/primary_500"
+        app:helperTextEnabled="false"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
         app:layout_constraintStart_toStartOf="@+id/gl_left"
-        app:layout_constraintTop_toBottomOf="@+id/input_password"
-        android:hint="@string/input_repeatPassword"
-        android:drawableStart="@drawable/ic_lock_primary"
-        android:drawablePadding="12dp"/>
+        app:layout_constraintEnd_toStartOf="@+id/gl_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/til_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_repeatpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_lock_primary"
+            android:drawablePadding="12dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_singup"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
+        android:onClick="click"
         app:layout_constraintEnd_toStartOf="@+id/gl_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gl_left"
-        app:layout_constraintTop_toBottomOf="@+id/input_repeatPassword"
+        app:layout_constraintTop_toBottomOf="@+id/til_repeatpassword"
         android:background="@drawable/custom_button_gradient"
         android:text="@string/btn_signup"/>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_login_alt"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
+        android:onClick="click"
         app:layout_constraintEnd_toStartOf="@+id/gl_right"
         app:layout_constraintStart_toStartOf="@+id/gl_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_singup"

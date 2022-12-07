@@ -9,6 +9,8 @@
     <string name="input_email">Ingresa tu email</string>
     <string name="input_password">Ingresa tu contraseña</string>
     <string name="input_repeatPassword">Repite tu contraseña</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ht_email">Ej: user@mail.com</string>
+    <string name="ht_password">La contraseña debe estar conformada por al menos 6 carácteres alfanuméricos (A-Z, 1-9).</string>
+    <string name="ht_repeatpassword">Las contraseñas deben ser iguales</string>
+    <string name="input_repeatpassword">Repite la contraseña ingresada</string>
 </resources>

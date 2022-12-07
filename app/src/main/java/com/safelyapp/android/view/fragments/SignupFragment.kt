@@ -14,8 +14,7 @@ class SignupFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = FragmentSignupBinding.inflate(layoutInflater)
+        //binding = FragmentSignupBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(

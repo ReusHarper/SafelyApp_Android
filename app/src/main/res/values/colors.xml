@@ -19,7 +19,7 @@
     <color name="neutral_dark">#363637</color>
     <color name="info">#058AFF</color>
     <color name="error">#FF6D63</color>
+    <color name="accent">#16BC5E</color>
     <color name="success">#16BC5E</color>
     <color name="warning">#EFEC21</color>
-
 </resources>
