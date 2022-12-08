@@ -92,7 +92,7 @@
         android:hint="@string/input_password"
         android:paddingTop="10dp"
         android:textSize="14sp"
-        app:endIconMode="clear_text"
+        app:endIconMode="password_toggle"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"

@@ -12,5 +12,5 @@
     <string name="ht_email">Ejemplo: user@mail.com</string>
     <string name="ht_password">La contraseña debe estar conformada por al menos 6 carácteres alfanuméricos (A-Z, 1-9).</string>
     <string name="ht_repeatpassword">Las contraseñas deben ser iguales</string>
-    <string name="input_repeatpassword">Repite la contraseña ingresada</string>
+    <string name="input_repeatpassword">Repite la contraseña</string>
 </resources>
