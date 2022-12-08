@@ -1,17 +1,17 @@
 package com.safelyapp.android.view.activities
 
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.size
+import androidx.fragment.app.*
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityMainBinding
 import com.safelyapp.android.view.fragments.LoginFragment
 import com.safelyapp.android.view.fragments.SignupFragment
-import kotlin.math.log
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,11 +32,15 @@ class MainActivity : AppCompatActivity() {
         signupFragment = SignupFragment()
         loginFragment = LoginFragment()
 
-        fragmentManager = supportFragmentManager
-        fragmentTransaction = fragmentManager.beginTransaction()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, loginFragment).commit()
+    }
 
-        // Inicio del fragment Login
-        fragmentTransaction.add(R.id.fragment_container, loginFragment).commit()
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     fun click(view: View) {
@@ -45,16 +49,24 @@ class MainActivity : AppCompatActivity() {
         // Cambio entre fragments dependiendo si se selecciona iniciar sesion o crear una cuenta
         when(view.id){
             R.id.btn_signup_alt -> {
-                fragmentTransaction.replace(R.id.fragment_container, signupFragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                supportFragmentManager.commit {
+                    replace<SignupFragment>(R.id.fragment_container)
+                    setReorderingAllowed(true)
+                    //addToBackStack("signup")
+                }
+
             }
 
             R.id.btn_login_alt -> {
-                fragmentTransaction.replace(R.id.fragment_container, loginFragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                supportFragmentManager.commit {
+                    replace<LoginFragment>(R.id.fragment_container)
+                    setReorderingAllowed(true)
+                    //addToBackStack("login")
+                }
             }
         }
     }
 }
+
+// Limpieza de los fragments acumulados para evitar superposionamiento de vistas
+//binding.fragmentContainer.removeAllViews()

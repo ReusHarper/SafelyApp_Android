@@ -10,11 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.safelyapp.android.R
 import com.safelyapp.android.databinding.FragmentSignupBinding
 import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.activities.ProviderType
 
-class SignupFragment : Fragment() {
+class SignupFragment : Fragment(R.layout.fragment_signup) {
 
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!

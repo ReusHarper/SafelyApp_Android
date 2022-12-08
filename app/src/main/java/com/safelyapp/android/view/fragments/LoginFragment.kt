@@ -18,7 +18,7 @@ import com.safelyapp.android.databinding.FragmentSignupBinding
 import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.activities.ProviderType
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
