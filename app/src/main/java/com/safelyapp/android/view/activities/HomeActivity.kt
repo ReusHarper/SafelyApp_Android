@@ -22,14 +22,14 @@ class HomeActivity : AppCompatActivity() {
         val bundle = intent.extras
         val email = bundle?.getString("email")
         val providerType = bundle?.getString("provider")
-        setup(email ?: "error", providerType ?: "error")
+        // setup(email ?: "error", providerType ?: "error")
     }
 
     override fun onStart() {
         super.onStart()
     }
 
-    private fun setup(email: String, providerType: String) {
+    /*private fun setup(email: String, providerType: String) {
         binding.emailTextView.text = email
         binding.providerTextView.text = providerType
 
@@ -38,6 +38,6 @@ class HomeActivity : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             onBackPressed()
         }
-    }
+    }*/
 
 }

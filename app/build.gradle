@@ -60,7 +60,9 @@ dependencies {
     def v_navigation = "2.5.3"
     def v_lifecycle = "2.3.1"
     def v_lottie = "5.2.0"
-    def v_firebase = "21.1.0"
+    def v_firebase_auth = "21.1.0"
+    def v_firebase_analytics = "21.2.0"
+    def v_maps = "18.1.0"
 
     // Default
     implementation "androidx.core:core-ktx:$v_core"
@@ -78,8 +80,11 @@ dependencies {
     implementation "com.google.android.material:material:$v_materialDesign"
 
     // Firebase
-    implementation "com.google.firebase:firebase-auth-ktx:$v_firebase"
-    implementation "com.google.firebase:firebase-analytics-ktx:$v_firebase"
+    implementation "com.google.firebase:firebase-auth-ktx:$v_firebase_auth"
+    implementation "com.google.firebase:firebase-analytics-ktx:$v_firebase_analytics"
+
+    // Google Maps
+    implementation "com.google.android.gms:play-services-maps:$v_maps"
 
     // Animations
     implementation "com.airbnb.android:lottie:$v_lottie"
