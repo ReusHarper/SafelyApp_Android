@@ -42,7 +42,6 @@
         android:gravity="center"
         android:text="@string/view_title_login"
         android:textAlignment="center"
-        android:textColor="@color/primary_500"
         android:textSize="40sp"
         app:layout_constraintEnd_toStartOf="@+id/gl_right"
         app:layout_constraintStart_toStartOf="@+id/gl_left"
@@ -109,12 +108,13 @@
             android:id="@+id/tiet_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_email_primary"
+            android:drawableStart="@drawable/ic_lock_primary"
             android:drawablePadding="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_login"
+        android:theme="@style/buttonsFull"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -128,12 +128,12 @@
 
     <Button
         android:id="@+id/btn_signup_alt"
+        android:theme="@style/buttonsTransparents"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_button_transparent_primary"
         android:text="@string/btn_signup_alt"
-        android:textColor="@color/primary_500"
         android:onClick="click"
         app:layout_constraintEnd_toStartOf="@+id/gl_right"
         app:layout_constraintStart_toStartOf="@+id/gl_left"

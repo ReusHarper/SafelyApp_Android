@@ -46,7 +46,6 @@
         android:textSize="40sp"
         android:textAlignment="center"
         android:gravity="center"
-        android:textColor="@color/primary_500"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +62,6 @@
         android:textSize="14sp"
         app:endIconMode="clear_text"
         app:helperText="@string/ht_email"
-        app:helperTextTextColor="@color/primary_500"
         app:helperTextEnabled="false"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
@@ -96,7 +94,6 @@
         android:textSize="14sp"
         app:endIconMode="clear_text"
         app:helperText="@string/ht_password"
-        app:helperTextTextColor="@color/primary_500"
         app:helperTextEnabled="false"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
@@ -129,7 +126,6 @@
         android:textSize="14sp"
         app:endIconMode="clear_text"
         app:helperText="@string/ht_repeatpassword"
-        app:helperTextTextColor="@color/primary_500"
         app:helperTextEnabled="false"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
@@ -151,6 +147,7 @@
 
     <Button
         android:id="@+id/btn_singup"
+        android:theme="@style/buttonsFull"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
@@ -164,6 +161,7 @@
 
     <Button
         android:id="@+id/btn_login_alt"
+        android:theme="@style/buttonsTransparents"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -172,6 +170,5 @@
         app:layout_constraintStart_toStartOf="@+id/gl_left"
         app:layout_constraintTop_toBottomOf="@+id/btn_singup"
         android:background="@drawable/custom_button_transparent_primary"
-        android:textColor="@color/primary_500"
         android:text="@string/btn_login_alt"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityMainBinding
@@ -19,7 +20,8 @@ class MainActivity : AppCompatActivity() {
     // ========== Fragments ==========
     private lateinit var signupFragment: SignupFragment
     private lateinit var loginFragment: LoginFragment
-    private lateinit var transaction: FragmentTransaction
+    private lateinit var fragmentManager: FragmentManager
+    private lateinit var fragmentTransaction: FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,23 +32,28 @@ class MainActivity : AppCompatActivity() {
         signupFragment = SignupFragment()
         loginFragment = LoginFragment()
 
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager.beginTransaction()
+
         // Inicio del fragment Login
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, loginFragment).commit()
+        fragmentTransaction.add(R.id.fragment_container, loginFragment).commit()
     }
 
     fun click(view: View) {
-        val transaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction = supportFragmentManager.beginTransaction()
 
         // Cambio entre fragments dependiendo si se selecciona iniciar sesion o crear una cuenta
         when(view.id){
             R.id.btn_signup_alt -> {
-                transaction.replace(R.id.fragment_container, signupFragment).commit()
-                //transaction.addToBackStack(null)
+                fragmentTransaction.replace(R.id.fragment_container, signupFragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
             }
 
             R.id.btn_login_alt -> {
-                transaction.replace(R.id.fragment_container, loginFragment).commit()
-                //transaction.addToBackStack(null)
+                fragmentTransaction.replace(R.id.fragment_container, loginFragment)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
             }
         }
     }

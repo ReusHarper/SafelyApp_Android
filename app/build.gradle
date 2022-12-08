@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.safelyapp.android"
         minSdk 26
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -47,18 +48,19 @@ android {
 }
 
 dependencies {
-
-    def v_core = "1.7.0"
+    // Versions
+    def v_core = "1.9.0"
     def v_espressoCore = "3.5.0"
     def v_appCompat = "1.5.1"
     def v_materialDesign = "1.7.0"
     def v_constLayout = "2.1.4"
     def v_junit = "4.13.2"
     def v_extJunit = "1.1.4"
-    def v_coordLayout = "1.1.0"
-    def v_navigation = "2.5.2"
+    def v_coordLayout = "1.2.0"
+    def v_navigation = "2.5.3"
     def v_lifecycle = "2.3.1"
     def v_lottie = "5.2.0"
+    def v_firebase = "21.1.0"
 
     // Default
     implementation "androidx.core:core-ktx:$v_core"
@@ -74,6 +76,10 @@ dependencies {
 
     // Material Design 3
     implementation "com.google.android.material:material:$v_materialDesign"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-auth-ktx:$v_firebase"
+    implementation "com.google.firebase:firebase-analytics-ktx:$v_firebase"
 
     // Animations
     implementation "com.airbnb.android:lottie:$v_lottie"

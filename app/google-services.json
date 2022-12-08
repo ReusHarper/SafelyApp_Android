@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1075229310886",
+    "project_id": "safelyapp-rh7u7",
+    "storage_bucket": "safelyapp-rh7u7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075229310886:android:417d75d510c5308b2a5967",
+        "android_client_info": {
+          "package_name": "com.safelyapp.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075229310886-icncise60bvm4o481q5cbqf354iiv6mn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRLdREgdo5iDiVtTz2XXzsp_BNaBVVpGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075229310886-icncise60bvm4o481q5cbqf354iiv6mn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1075229310886-csk6fk3g7hatletmon8b8voaj9aqockd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.redflight.SafelyApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
