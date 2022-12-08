@@ -3,6 +3,7 @@ package com.safelyapp.android.view.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.auth.FirebaseAuth
 import com.safelyapp.android.databinding.ActivityHomeBinding
 
 private lateinit var binding: ActivityHomeBinding
@@ -31,6 +32,12 @@ class HomeActivity : AppCompatActivity() {
     private fun setup(email: String, providerType: String) {
         binding.emailTextView.text = email
         binding.providerTextView.text = providerType
+
+        // Cierre de sesion por Firebase
+        binding.btnLogout.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            onBackPressed()
+        }
     }
 
 }
