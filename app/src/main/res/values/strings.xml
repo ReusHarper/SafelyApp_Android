@@ -15,4 +15,7 @@
     <string name="input_repeatpassword">Repite la contraseña</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="icon_location">Mapa</string>
+    <string name="icon_group_add">Añadir</string>
+    <string name="icon_devices">Dispositivos</string>
 </resources>

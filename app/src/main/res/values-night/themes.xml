@@ -32,4 +32,9 @@
         <item name="colorOnPrimary">@color/tertiary_500</item>
         <item name="colorSecondary">@color/secondary_500</item>
     </style>
+
+    <!-- Menu bar. -->
+    <style name="barMenu">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
 </resources>

@@ -6,19 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.safelyapp.android.R
-import com.safelyapp.android.databinding.FragmentLoginBinding
-import com.safelyapp.android.databinding.FragmentMapsBinding
+import com.safelyapp.android.databinding.FragmentGroupsBinding
 
-class MapsFragment : Fragment(R.layout.fragment_maps) {
+class GroupsFragment : Fragment(R.layout.fragment_groups) {
 
-    private var _binding: FragmentMapsBinding? = null
+    private var _binding: FragmentGroupsBinding? = null
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMapsBinding.inflate(inflater, container, false)
+        _binding = FragmentGroupsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
