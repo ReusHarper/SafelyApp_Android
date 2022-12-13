@@ -18,4 +18,5 @@
     <string name="icon_location">Mapa</string>
     <string name="icon_group_add">Añadir</string>
     <string name="icon_devices">Dispositivos</string>
+    <string name="btn_emergency">EMERGENCIA</string>
 </resources>

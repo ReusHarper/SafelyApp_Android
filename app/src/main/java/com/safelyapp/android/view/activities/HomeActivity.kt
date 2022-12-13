@@ -1,27 +1,30 @@
 package com.safelyapp.android.view.activities
 
+import android.Manifest
 import android.app.AlertDialog
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityHomeBinding
 import com.safelyapp.android.view.fragments.*
+
 
 enum class ProviderType {
     BASIC
 }
 
 class HomeActivity : AppCompatActivity() {
+
+    companion object {
+        const val REQUEST_CODE_LOCATION = 0
+    }
 
     private lateinit var binding: ActivityHomeBinding
 
@@ -36,6 +39,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
 
+    // ========== Ciclo de vida ==========
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -58,7 +62,8 @@ class HomeActivity : AppCompatActivity() {
         bottomMenu()
 
         // Agregacion de vista inicial
-        supportFragmentManager.beginTransaction().add(R.id.fragment_container, mapsFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container, mapsFragment)
+            .commit()
     }
 
     override fun onStart() {
@@ -72,6 +77,8 @@ class HomeActivity : AppCompatActivity() {
         super.onResume()
     }
 
+    // ========== Metodos propios ==========
+    // Comprobacion de correo y metodo de ingreso
     /*private fun setup(email: String, providerType: String) {
         binding.emailTextView.text = email
         binding.providerTextView.text = providerType
@@ -83,20 +90,23 @@ class HomeActivity : AppCompatActivity() {
         }
     }*/
 
+    // Funcionalidad del menu principal
     private fun bottomMenu() {
         fragmentTransaction = supportFragmentManager.beginTransaction()
 
         // Cambio entre fragments dependiendo de la seleccion desde el bar menu
-        navegation.setOnItemSelectedListener{
-            when(it.itemId) {
+        navegation.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.item_fragment_map -> replaceFragment(mapsFragment)
                 R.id.item_fragment_group -> replaceFragment(groupsFragment)
                 R.id.item_fragment_devices -> replaceFragment(devicesFragment)
 
                 else -> {
-                    showAlert("Error de sistema",
+                    showAlert(
+                        "Error de sistema",
                         "Ha ocurrido un problema con la vista actual, por favor reintente de nuevo.",
-                        "Aceptar")
+                        "Aceptar"
+                    )
                 }
             }
             true
@@ -112,7 +122,35 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun showAlert(title: String, message: String, buttonAction: String) {
+    // Comprobacion de permisos
+    internal fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    // Solicitud de permiso de geolocalizacion
+    internal fun requestLocationPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
+            showAlert(
+                "Permisos insuficientes",
+                "Para poder utilizar la aplicacion es necesario permitir la geolocalizacion. Ve a ajustes y habilita dicho permiso.",
+                "Aceptar"
+            )
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_CODE_LOCATION
+            )
+        }
+    }
+
+    // Envio de alertas personalizadas
+    internal fun showAlert(title: String, message: String, buttonAction: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(title)
         builder.setMessage(message)
