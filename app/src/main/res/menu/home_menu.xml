@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/btn_home" />
+        <item
+            android:id="@+id/nav_medical"
+            android:icon="@drawable/ic_medical_information"
+            android:title="@string/btn_medical_history" />
+        <item
+            android:id="@+id/nav_code"
+            android:icon="@drawable/ic_lock"
+            android:title="@string/btn_code_sos" />
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/btn_profile">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_profile"
+                        android:icon="@drawable/ic_account"
+                        android:title="@string/btn_account" />
+                    <item
+                        android:id="@+id/nav_logout"
+                        android:icon="@drawable/ic_logout"
+                        android:title="@string/btn_logout" />
+                </group>
+            </menu>
+        </item>
+    </group>
+
+</menu>

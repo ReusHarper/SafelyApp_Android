@@ -19,4 +19,16 @@
     <string name="icon_group_add">Añadir</string>
     <string name="icon_devices">Dispositivos</string>
     <string name="btn_emergency">EMERGENCIA</string>
+    <string name="view_title_menu">Menú</string>
+    <string name="btn_account">Cuenta</string>
+    <string name="btn_groups">Grupos</string>
+    <string name="btn_medical_history">Historial Médico</string>
+    <string name="btn_code_sos">Código SOS</string>
+    <string name="btn_home">Inicio</string>
+    <string name="btn_logout">Cerrar sesión</string>
+    <string name="btn_profile">Perfil</string>
+    <string name="txt_info_web">Visita nuestro sitio web:</string>
+    <string name="txt_website">www.safelyapp.com</string>
+    <string name="navigation_drawer_open">Menu desplegable abierto</string>
+    <string name="navigation_drawer_close">Menu desplegable cerrado</string>
 </resources>

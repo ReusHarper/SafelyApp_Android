@@ -18,6 +18,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
         <!-- Drawable -->
         <item name="android:drawableTint">?attr/colorPrimary</item>
+        <!-- Navigation View -->
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <!-- Buttons. -->

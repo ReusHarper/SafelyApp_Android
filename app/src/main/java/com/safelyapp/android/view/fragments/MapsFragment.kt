@@ -4,13 +4,16 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -20,6 +23,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.UiSettings
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.navigation.NavigationView
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.FragmentMapsBinding
 import com.safelyapp.android.view.activities.HomeActivity
@@ -35,7 +39,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // ========== Data User ==========
     private var coordinate: LatLng = LatLng(28.043893, -16.539329)
-    private var location: Location? = null
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -45,6 +48,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     private lateinit var btn_alerts: Button
     private lateinit var btn_map: Button
     private lateinit var btn_marker: Button
+    private lateinit var drawer_layout: DrawerLayout
+    private lateinit var nav_view: NavigationView
 
     // ========== Data Google ==========
     private lateinit var googleMap: GoogleMap
@@ -56,16 +61,18 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         bundle = savedInstanceState
 
-        // Asignacion de botones mediante binding
+        // Asignacion de elementos mediante binding
         btn_emergency = binding.btnEmergency
         btn_menu = binding.btnMenu
         btn_alerts = binding.btnAlerts
         btn_map = binding.btnTypemap
         btn_marker = binding.btnMarker
+        drawer_layout = binding.mapsDrawerLayout
+        nav_view = binding.mapsNav
 
         // Obtencion de geolocalizacion actual
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -136,7 +143,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // Verificacion de carga completa del mapa
     override fun onMapReady(map: GoogleMap) {
-        map?.let {
+        map.let {
             googleMap = it
         }
 
@@ -211,10 +218,8 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             setLocation(location)
 
             // Establecimiento de marcador en la posicion registrada
-            if (location != null) {
-                val currentPosition = LatLng(location.latitude, location.longitude)
-                setMarker(currentPosition)
-            }
+            val currentPosition = LatLng(location.latitude, location.longitude)
+            setMarker(currentPosition)
         }
     }
 
@@ -237,13 +242,14 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     fun setLocation(location: Location) { lastLocation = location }
 
-    fun getLocation() : Location { return lastLocation!! }
+    fun getLocation() : Location { return lastLocation }
 
     // Observador de acciones de usuario
     private fun observer() {
         enableLocation()
         changeTypeMap()
         returnCurrentPosition()
+        showMenu()
     }
 
     // Cambio de mapa 2D a 3D
@@ -264,18 +270,31 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         }
     }
 
+    // Reubicacion de marcador
     private fun returnCurrentPosition() {
         btn_marker.setOnClickListener {
-            animationCamera(LatLng(lastLocation.latitude, lastLocation.longitude), 3000, 18f)
+            animationCamera(LatLng(lastLocation.latitude, lastLocation.longitude), 2000, 16f)
         }
     }
 
+    // Reubica la posicion de la camara mediante una animacion corta
     private fun animationCamera(coordinate: LatLng, duration: Int, zoom: Float) {
         googleMap.animateCamera(
             CameraUpdateFactory.newLatLngZoom(coordinate, zoom),
             duration,
             null
         )
+    }
+
+    // Despliega un menu lateral si se oprime el boton de menu
+    private fun showMenu() {
+        btn_menu.setOnClickListener {
+            if (!drawer_layout.isDrawerOpen(Gravity.LEFT)) {
+                drawer_layout.openDrawer(Gravity.LEFT)
+            }
+            else
+                drawer_layout.closeDrawer(Gravity.RIGHT)
+        }
     }
 
 }

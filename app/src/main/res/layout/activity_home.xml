@@ -26,4 +26,13 @@
         app:itemTextColor="@color/icons_color"
         android:layout_gravity="bottom"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
