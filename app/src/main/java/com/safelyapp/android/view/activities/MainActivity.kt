@@ -1,11 +1,10 @@
 package com.safelyapp.android.view.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.size
 import androidx.fragment.app.*
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityMainBinding
@@ -28,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Verificacion de inicio de sesion
+        sesiones()
+
         // Control y manejo de cada Fragment
         signupFragment = SignupFragment()
         loginFragment = LoginFragment()
@@ -41,6 +43,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+    }
+
+    private fun sesiones() {
+        val preferencias = getSharedPreferences(getString(R.string.file_preferencia), Context.MODE_PRIVATE)
+        var email:String? = preferencias.getString("email", null)
+        var proovedor:String? = preferencias.getString("proovedor", null)
+
+        if (email != null && proovedor != null) {
+            showHome(email, proovedor)
+        }
     }
 
     fun click(view: View) {
@@ -66,7 +78,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
 
-// Limpieza de los fragments acumulados para evitar superposionamiento de vistas
-//binding.fragmentContainer.removeAllViews()
+    private fun showHome(email: String, provider: String) {
+        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+            putExtra("email", email)
+            putExtra("provider", provider)
+        }
+
+        // Se asigna una bandera que indique se queda limpio el stack de activities
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(homeIntent)
+    }
+}

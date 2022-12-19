@@ -93,7 +93,11 @@
         android:hint="@string/input_password"
         android:paddingTop="10dp"
         android:textSize="14sp"
-        app:endIconMode="password_toggle"
+        app:endIconDrawable="@drawable/ic_selector"
+        android:inputType="textVisiblePassword"
+        android:state_checked="true"
+        app:passwordToggleEnabled="true"
+        app:endIconTint="@color/primary_500"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
@@ -110,7 +114,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_lock_primary"
-            android:drawablePadding="12dp" />
+            android:drawablePadding="12dp"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

@@ -35,6 +35,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
     private var bundle: Bundle? = null
+    private var switch_menu : Boolean = false
     // private lateinit var activityContainer : MapsFragmentComunicate?
 
     // ========== Data User ==========
@@ -50,6 +51,9 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     private lateinit var btn_marker: Button
     private lateinit var drawer_layout: DrawerLayout
     private lateinit var nav_view: NavigationView
+
+    // ========== Fragments ==========
+    private lateinit var medicalFragment: MedicalHistoryFragment
 
     // ========== Data Google ==========
     private lateinit var googleMap: GoogleMap
@@ -72,7 +76,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         btn_map = binding.btnTypemap
         btn_marker = binding.btnMarker
         drawer_layout = binding.mapsDrawerLayout
-        nav_view = binding.mapsNav
+        //nav_view = binding.mapsNav
 
         // Obtencion de geolocalizacion actual
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -289,11 +293,19 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     // Despliega un menu lateral si se oprime el boton de menu
     private fun showMenu() {
         btn_menu.setOnClickListener {
+            if (!switch_menu){
+                (activity as HomeActivity).menuFragment()
+                switch_menu = true
+            } else
+                switch_menu = false
+
+            /*
             if (!drawer_layout.isDrawerOpen(Gravity.LEFT)) {
                 drawer_layout.openDrawer(Gravity.LEFT)
             }
             else
                 drawer_layout.closeDrawer(Gravity.RIGHT)
+             */
         }
     }
 

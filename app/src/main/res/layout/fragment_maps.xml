@@ -6,17 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
     tools:context=".view.fragments.MapsFragment">
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/maps_nav"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:headerLayout="@layout/header"
-        app:menu="@menu/home_menu"
-        android:layout_gravity="start"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

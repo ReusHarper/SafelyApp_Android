@@ -3,20 +3,19 @@ package com.safelyapp.android.view.fragments
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.FragmentLoginBinding
-import com.safelyapp.android.databinding.FragmentSignupBinding
 import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.activities.ProviderType
+
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -26,6 +25,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var buttonLogin: Button
     private lateinit var buttonSignUp: Button
+    private lateinit var textPassword: TextInputLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +45,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun observer() {
         buttonSignUp = binding.btnSignupAlt
         buttonLogin = binding.btnLogin
+        textPassword = binding.tilPassword
 
         // Observacion de acciones en botones:
         buttonLogin.setOnClickListener {
@@ -102,11 +103,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun showHome(email: String, provider: ProviderType) {
-        val homeIntent = Intent(context, HomeActivity::class.java).apply {
+        val homeIntent = Intent(requireContext(), HomeActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
         }
 
+        // Se asigna una bandera que indique se queda limpio el stack de activities
+        homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(homeIntent)
     }
 

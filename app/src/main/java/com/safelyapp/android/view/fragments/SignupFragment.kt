@@ -110,11 +110,13 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
     }
 
     private fun showHome(email: String, provider: ProviderType) {
-        val homeIntent = Intent(context, HomeActivity::class.java).apply {
+        val homeIntent = Intent(requireContext(), HomeActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
         }
 
+        // Se asigna una bandera que indique se queda limpio el stack de activities
+        homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(homeIntent)
     }
 

@@ -1,4 +1,5 @@
 <resources>
+    <string name="file_preferencia">com.safelyapp.autentifiacion.PREFERENCE_FILE_KEY</string>
     <string name="app_name">SafelyApp</string>
     <string name="btn_login">Inicia sesión</string>
     <string name="btn_login_alt">¿Ya tienes una cuenta? Inicia sesión</string>
@@ -13,7 +14,6 @@
     <string name="ht_password">La contraseña debe estar conformada por al menos 6 carácteres alfanuméricos (A-Z, 1-9)</string>
     <string name="ht_repeatpassword">Por cuestiones de seguridad, las contraseñas deben ser iguales</string>
     <string name="input_repeatpassword">Repite la contraseña</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="icon_location">Mapa</string>
     <string name="icon_group_add">Añadir</string>

@@ -17,13 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/SafelyApp"
         tools:targetApi="31">
-        <activity
-            android:name=".view.activities.MenuActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -31,10 +24,7 @@
 
         <activity
             android:name=".view.activities.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activities.HomeActivity"
-            android:exported="true">
+            android:exported="true" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -44,6 +34,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.activities.HomeActivity"
+            android:exported="false">
+
         </activity>
     </application>
 

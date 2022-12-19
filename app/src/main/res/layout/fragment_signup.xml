@@ -85,6 +85,7 @@
         android:id="@+id/til_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         layout="@layout/input_text_primary"
+        app:passwordToggleEnabled="true"
         android:layout_width="0dp"
         android:layout_height="110dp"
         android:drawablePadding="12dp"
@@ -92,7 +93,10 @@
         android:hint="@string/input_password"
         android:paddingTop="10dp"
         android:textSize="14sp"
-        app:endIconMode="password_toggle"
+        android:password="true"
+        android:inputType="textPassword"
+        android:state_checked="true"
+        app:endIconDrawable="@drawable/ic_selector"
         app:helperText="@string/ht_password"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
@@ -109,13 +113,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_lock_primary"
-            android:drawablePadding="12dp"/>
+            android:drawablePadding="12dp"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_repeatpassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         layout="@layout/input_text_primary"
+        app:passwordToggleEnabled="true"
         android:layout_width="0dp"
         android:layout_height="110dp"
         android:drawablePadding="12dp"
@@ -123,7 +129,9 @@
         android:hint="@string/input_repeatpassword"
         android:paddingTop="10dp"
         android:textSize="14sp"
-        app:endIconMode="password_toggle"
+        android:inputType="textPassword"
+        android:state_checked="true"
+        app:endIconDrawable="@drawable/ic_selector"
         app:helperText="@string/ht_repeatpassword"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="16dp"
@@ -140,7 +148,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_lock_primary"
-            android:drawablePadding="12dp"/>
+            android:drawablePadding="12dp"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -155,7 +164,7 @@
         app:layout_constraintStart_toStartOf="@+id/gl_left"
         app:layout_constraintTop_toBottomOf="@+id/til_repeatpassword"
         android:background="@drawable/custom_button_gradient"
-        android:text="@string/btn_signup"/>
+        android:text="@string/btn_signup" />
 
     <Button
         android:id="@+id/btn_login_alt"
