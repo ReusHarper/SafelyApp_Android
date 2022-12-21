@@ -49,10 +49,6 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-
     // Versions
     def v_core = "1.9.0"
     def v_espressoCore = "3.5.0"
@@ -67,9 +63,13 @@ dependencies {
     def v_lottie = "5.2.0"
     def v_firebase_auth = "21.1.0"
     def v_firebase_analytics = "21.2.0"
+    def v_firebase_bom = "31.0.2"
     def v_maps = "18.1.0"
     def v_location = "21.0.1"
     def v_drawer_layout = "1.1.1"
+    def v_legacy = "1.0.0"
+    def v_lifecycle_livedata = "2.5.1"
+    def v_lifecycle_viewmodel = "2.5.1"
 
     // Default
     implementation "androidx.core:core-ktx:$v_core"
@@ -83,6 +83,9 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$v_espressoCore"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$v_lifecycle"
     implementation "androidx.drawerlayout:drawerlayout:$v_drawer_layout"
+    implementation "androidx.legacy:legacy-support-v4:$v_legacy"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$v_lifecycle_livedata"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$v_lifecycle_viewmodel"
 
     // Material Design 3
     implementation "com.google.android.material:material:$v_materialDesign"
@@ -90,6 +93,8 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-auth-ktx:$v_firebase_auth"
     implementation "com.google.firebase:firebase-analytics-ktx:$v_firebase_analytics"
+    implementation platform("com.google.firebase:firebase-bom:$v_firebase_bom")
+    implementation "com.google.firebase:firebase-firestore-ktx"
 
     // Google Maps & Location
     implementation "com.google.android.gms:play-services-maps:$v_maps"
