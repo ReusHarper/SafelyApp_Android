@@ -2,9 +2,12 @@ package com.safelyapp.android.view.activities
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.*
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityMainBinding
@@ -52,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         if (email != null && proovedor != null) {
             showHome(email, proovedor)
+            finish()
         }
     }
 

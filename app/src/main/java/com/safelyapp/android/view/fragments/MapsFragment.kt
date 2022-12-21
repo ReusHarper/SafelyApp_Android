@@ -3,16 +3,17 @@ package com.safelyapp.android.view.fragments
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Location
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.UiSettings
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 import com.safelyapp.android.R
@@ -125,9 +127,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             )
             return
         }
-
-        // Observador de acciones de usuario
-        observer()
     }
 
     override fun onStart() {
@@ -147,17 +146,15 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // Verificacion de carga completa del mapa
     override fun onMapReady(map: GoogleMap) {
-        map.let {
-            googleMap = it
-        }
+        map.let { googleMap = it }
 
         // Eliminacion de configuraciones en la UI proveidas por Google Maps
         uiSettings = googleMap.uiSettings
         uiSettings.setMyLocationButtonEnabled(false)
         uiSettings.setCompassEnabled(false)
 
-        // Observador de acciones de usuario
         observer()
+        changeStyleMap()
     }
 
     // Comprobacion de los permisos
@@ -224,6 +221,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             // Establecimiento de marcador en la posicion registrada
             val currentPosition = LatLng(location.latitude, location.longitude)
             setMarker(currentPosition)
+            aniPosition = true
         }
     }
 
@@ -235,13 +233,10 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         googleMap.addMarker(marker)
 
         // Si es la 1era vez en mostrarse el mapa, se procede con realizar una animacion corta
-        if (!aniPosition) {
+        if (!aniPosition)
             animationCamera(coordinate, 3000, 18f)
-            aniPosition = true
-        }
-        else {
+        else
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 18f))
-        }
     }
 
     fun setLocation(location: Location) { lastLocation = location }
@@ -250,10 +245,10 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // Observador de acciones de usuario
     private fun observer() {
+        showMenu()
         enableLocation()
         changeTypeMap()
         returnCurrentPosition()
-        showMenu()
     }
 
     // Cambio de mapa 2D a 3D
@@ -262,10 +257,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             if (typeMap == 0) {
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL)
                 typeMap = 1
-            }
-            else if (typeMap == 1) {
-                googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN)
-                typeMap = 2
             }
             else {
                 googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID)
@@ -277,7 +268,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     // Reubicacion de marcador
     private fun returnCurrentPosition() {
         btn_marker.setOnClickListener {
-            animationCamera(LatLng(lastLocation.latitude, lastLocation.longitude), 2000, 16f)
+            animationCamera(LatLng(lastLocation.latitude, lastLocation.longitude), 3000, 16f)
         }
     }
 
@@ -298,14 +289,22 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
                 switch_menu = true
             } else
                 switch_menu = false
+        }
+    }
 
-            /*
-            if (!drawer_layout.isDrawerOpen(Gravity.LEFT)) {
-                drawer_layout.openDrawer(Gravity.LEFT)
-            }
-            else
-                drawer_layout.closeDrawer(Gravity.RIGHT)
-             */
+    //fun changeStyleMap(type: String) {
+    fun changeStyleMap() {
+        // Carga de archivos para los estilos de mapa dependiendo del modo del dispositivo
+        val darkMapStyle = MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.night_mode_map)
+        val lightMapStyle = MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.light_mode_map)
+
+        // Obtencion del tipo de modo del dispositivo
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        when (currentNightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> googleMap.setMapStyle(lightMapStyle)
+            Configuration.UI_MODE_NIGHT_YES -> googleMap.setMapStyle(darkMapStyle)
+            else -> googleMap.setMapStyle(lightMapStyle)
         }
     }
 

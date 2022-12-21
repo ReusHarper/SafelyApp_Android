@@ -5,15 +5,18 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.*
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -81,7 +84,7 @@ class HomeActivity : AppCompatActivity() {
         nav_menu_side = binding.navMenuSide
 
         // Limpieza del stack de fragments
-        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
         // Observacion de bottom menu
         bottomMenu()
@@ -101,6 +104,10 @@ class HomeActivity : AppCompatActivity() {
         bottomMenu()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+    }
+
     override fun onResume() {
         super.onResume()
     }
@@ -111,15 +118,10 @@ class HomeActivity : AppCompatActivity() {
         //if (supportFragmentManager.backStackEntryCount == 0)
         val fragmentCurrent = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
-        if (fragmentCurrent is MapsFragment) {
+        if (fragmentCurrent is MapsFragment)
             nav_menu_bottom.visibility = View.VISIBLE
-            Toast.makeText(this, "maps", Toast.LENGTH_SHORT).show()
-        } else if (supportFragmentManager.backStackEntryCount > 0)
-            Toast.makeText(this, "quedan mas", Toast.LENGTH_SHORT).show()
-        else {
+        else if (supportFragmentManager.backStackEntryCount == 0)
             this@HomeActivity.finish()
-            exitProcess(0)
-        }
     }
 
     // ========== Metodos propios ==========

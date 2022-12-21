@@ -31,4 +31,11 @@
     <string name="txt_website">www.safelyapp.com</string>
     <string name="navigation_drawer_open">Menu desplegable abierto</string>
     <string name="navigation_drawer_close">Menu desplegable cerrado</string>
+    <string name="title_account">Cuenta</string>
+    <string name="text_name">Nombre</string>
+    <string name="text_email">Correo electrónico</string>
+    <string name="text_phone">Teléfono</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="text_direction">Dirección</string>
 </resources>

@@ -13,6 +13,7 @@
     <color name="primary_500">#9DB2F9</color>
     <color name="secondary_500">#BFA6F9</color>
     <color name="tertiary_500">#F0C6A4</color>
+    <color name="tertiary_variant">#EEC856</color>
     <color name="icon">#1E2978</color>
     <color name="background">#F2F4F9</color>
     <color name="neutral_light">#FCFFEE</color>
