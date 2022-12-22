@@ -42,9 +42,11 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     // ========== Elements ==========
-    private lateinit var nav_menu_bottom: BottomNavigationView
+    internal lateinit var nav_menu_bottom: BottomNavigationView
     private lateinit var drawer_layout: DrawerLayout
     private lateinit var nav_menu_side: NavigationView
+    internal lateinit var email: String
+    internal lateinit var providerType: String
 
     // ========== Fragments ==========
     private lateinit var mapsFragment: MapsFragment
@@ -65,8 +67,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val bundle = intent.extras
-        val email = bundle?.getString("email")
-        val providerType = bundle?.getString("provider")
+        email = bundle?.getString("email").toString()
+        providerType = bundle?.getString("provider").toString()
         setup(email ?: "", providerType ?: "")
 
         // Control y manejo de cada Fragment

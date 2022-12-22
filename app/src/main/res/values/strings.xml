@@ -38,4 +38,8 @@
     <string name="btn_edit">Editar</string>
     <string name="btn_cancel">Cancelar</string>
     <string name="text_direction">Dirección</string>
+    <string name="text_bottom_sheet">Seleccione una opción</string>
+    <string name="btn_gallery">Subir imagen</string>
+    <string name="btn_camera">Tomar fotografía</string>
+    <string name="btn_confirm">" Confirmar"</string>
 </resources>

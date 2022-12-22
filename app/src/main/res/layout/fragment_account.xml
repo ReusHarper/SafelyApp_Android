@@ -205,7 +205,7 @@
             android:drawableStart="@drawable/ic_phone"
             android:drawablePadding="12dp"
             android:imeOptions="actionDone"
-            android:inputType="text"
+            android:inputType="phone"
             android:maxLines="1">
 
         </com.google.android.material.textfield.TextInputEditText>
@@ -218,7 +218,7 @@
         android:layout_height="60dp"
         android:background="@drawable/custom_button_gradient"
         android:onClick="click"
-        android:text="@string/btn_edit"
+        android:text="@string/btn_confirm"
         android:textSize="12sp"
         android:theme="@style/buttonsFull"
         app:icon="@drawable/ic_edit"

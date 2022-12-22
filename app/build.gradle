@@ -49,8 +49,11 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+
     // Versions
     def v_core = "1.9.0"
+    def v_activity = "1.6.1"
     def v_espressoCore = "3.5.0"
     def v_appCompat = "1.5.1"
     def v_materialDesign = "1.7.0"
@@ -63,16 +66,19 @@ dependencies {
     def v_lottie = "5.2.0"
     def v_firebase_auth = "21.1.0"
     def v_firebase_analytics = "21.2.0"
-    def v_firebase_bom = "31.0.2"
+    def v_firebase_bom = "30.5.0"
+    def v_firebase_ui = "7.2.0"
     def v_maps = "18.1.0"
     def v_location = "21.0.1"
     def v_drawer_layout = "1.1.1"
     def v_legacy = "1.0.0"
     def v_lifecycle_livedata = "2.5.1"
     def v_lifecycle_viewmodel = "2.5.1"
+    def v_picasso = "2.8"
 
     // Default
     implementation "androidx.core:core-ktx:$v_core"
+    implementation "androidx.activity:activity:$v_activity"
     implementation "androidx.appcompat:appcompat:$v_appCompat"
     implementation "androidx.constraintlayout:constraintlayout:$v_constLayout"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$v_coordLayout"
@@ -95,6 +101,7 @@ dependencies {
     implementation "com.google.firebase:firebase-analytics-ktx:$v_firebase_analytics"
     implementation platform("com.google.firebase:firebase-bom:$v_firebase_bom")
     implementation "com.google.firebase:firebase-firestore-ktx"
+    implementation "com.firebaseui:firebase-ui-storage:$v_firebase_ui"
 
     // Google Maps & Location
     implementation "com.google.android.gms:play-services-maps:$v_maps"
@@ -102,4 +109,7 @@ dependencies {
 
     // Animations
     implementation "com.airbnb.android:lottie:$v_lottie"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$v_picasso"
 }

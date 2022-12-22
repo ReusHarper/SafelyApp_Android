@@ -54,9 +54,6 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     private lateinit var drawer_layout: DrawerLayout
     private lateinit var nav_view: NavigationView
 
-    // ========== Fragments ==========
-    private lateinit var medicalFragment: MedicalHistoryFragment
-
     // ========== Data Google ==========
     private lateinit var googleMap: GoogleMap
     private lateinit var uiSettings: UiSettings
