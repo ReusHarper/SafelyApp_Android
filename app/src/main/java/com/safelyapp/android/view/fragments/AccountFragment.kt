@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.safelyapp.android.R
@@ -32,16 +33,16 @@ class AccountFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private var imgStorageReference = FirebaseStorage.getInstance().reference.child("users/img_profile/")
     private var URI_image: String? = null
+    private var dataInput: Boolean = false
 
     // ========== Multimedia & Peripheral ==========
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 // Imagen seleccionada
-                img_profile.setImageURI(uri)
+                img_profile?.setImageURI(uri)
                 URI_image = uri.toString()
-                Toast.makeText(requireContext(), "img: ${URI_image}", Toast.LENGTH_SHORT).show()
-                //uploadImage()
+                //Toast.makeText(requireContext(), "img: ${URI_image}", Toast.LENGTH_SHORT).show()
                 uploadImageToFirebase(uri)
             } else {
                 // Imagen no encontrada
@@ -57,11 +58,11 @@ class AccountFragment : Fragment() {
     private lateinit var txt_name: TextInputEditText
     private lateinit var txt_direction: TextInputEditText
     private lateinit var txt_phone: TextInputEditText
-    private lateinit var url_img_profile: String
-    private lateinit var img_profile: ImageView
     private lateinit var btn_edit: Button
     private lateinit var btn_cancel: Button
     private lateinit var btn_camera: Button
+    private var url_img_profile: String? = null
+    private var img_profile: ImageView? = null
 
     // ========== Ciclo de vida ==========
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,13 +101,13 @@ class AccountFragment : Fragment() {
     // ========== Metodos propios ==========
     // Observador de acciones de usuario
     private fun observer() {
-        getResource()
+        getMultimedia()
         editInformation()
         cancel()
     }
 
     // Obtencion de contenido multimedia (imagen o fotografia)
-    private fun getResource() {
+    private fun getMultimedia() {
         btn_camera.setOnClickListener {
             showDialog()
         }
@@ -127,8 +128,8 @@ class AccountFragment : Fragment() {
                 OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener {
                         val imageUrl = it.toString()
-                        db.collection("users").document((activity as HomeActivity).email).update(
-                            mapOf("img_profile" to imageUrl)
+                        db.collection("users").document((activity as HomeActivity).email).set(
+                            mapOf("img_profile" to imageUrl), SetOptions.merge()
                         )
                     }
                 })
@@ -141,17 +142,40 @@ class AccountFragment : Fragment() {
     // Edicion y confirmacion de cambios de los datos del usuario retornados hacia el servidor de Firestore
     private fun editInformation() {
         btn_edit.setOnClickListener {
-            db.collection("users").document((activity as HomeActivity).email).update(
-                mapOf(
-                    "provider" to (activity as HomeActivity).providerType,
-                    "name" to txt_name.text.toString(),
-                    "address" to txt_direction.text.toString(),
-                    "phone" to txt_phone.text.toString()
-                )
-            )
+            dataSetOrUpdateServer()
             Toast.makeText(requireContext(), "Información editada con éxito", Toast.LENGTH_SHORT).show()
             returnHome()
         }
+    }
+
+    private fun setData() {
+        db.collection("users").document((activity as HomeActivity).email).set(
+            mapOf(
+                "provider" to (activity as HomeActivity).providerType,
+                "name" to txt_name.text.toString(),
+                "address" to txt_direction.text.toString(),
+                "phone" to txt_phone.text.toString()
+            ), SetOptions.merge()
+        )
+    }
+
+    private fun updateData() {
+        db.collection("users").document((activity as HomeActivity).email).update(
+            mapOf(
+                "provider" to (activity as HomeActivity).providerType,
+                "name" to txt_name.text.toString(),
+                "address" to txt_direction.text.toString(),
+                "phone" to txt_phone.text.toString()
+            )
+        )
+    }
+
+    // Comprobacion de informacion almacenada en el dispositivo
+    private fun dataSetOrUpdateServer() {
+        if (isEmptyDataLocal())
+            setData()
+        else
+            updateData()
     }
 
     // Retorno al fragment principal (mapsFragment)
@@ -174,8 +198,15 @@ class AccountFragment : Fragment() {
                 txt_name.setText(value.get("name") as String?)
                 txt_direction.setText(value.get("address") as String?)
                 txt_phone.setText(value.get("phone") as String?)
-                Picasso.get().load(value.get("img_profile") as String).into(img_profile)
+                setImageProfile(value.get("img_profile") as String?)
             }
+
+        //Toast.makeText(requireContext(), "url: ${url_img_profile.toString()}", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setImageProfile(url: String?) {
+        if (url != null)
+            Picasso.get().load(url).into(img_profile)
     }
 
     // Generacion de menu emergente
@@ -204,6 +235,16 @@ class AccountFragment : Fragment() {
         //dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.getWindow()?.getAttributes()?.windowAnimations = R.style.DialogAnimation
         dialog.getWindow()?.setGravity(Gravity.BOTTOM)
+    }
+
+    // Comprobacion de imagen almacenada en el servidor de Firestore
+    private fun isEmptyDataLocal() : Boolean{
+        // Si todos los campos estan vacios entonces el usuario no ha ingresado nada de informacion
+        if ((txt_name.text!!.isEmpty() && txt_direction.text!!.isEmpty() && txt_phone.text!!.isEmpty()) || !dataInput){
+            dataInput = true
+            return true
+        }
+        return false
     }
 
 }
