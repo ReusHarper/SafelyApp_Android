@@ -4,16 +4,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/item_nav_home"
+            android:checked="true"
             android:icon="@drawable/ic_home"
             android:title="@string/btn_home" />
         <item
             android:id="@+id/item_nav_medical"
+            android:checked="false"
             android:icon="@drawable/ic_medical_information"
             android:title="@string/btn_medical_history" />
-        <item
-            android:id="@+id/item_nav_code"
-            android:icon="@drawable/ic_lock"
-            android:title="@string/btn_code_sos" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -22,10 +20,12 @@
                 <group android:checkableBehavior="single">
                     <item
                         android:id="@+id/item_nav_profile"
+                        android:checked="false"
                         android:icon="@drawable/ic_account"
                         android:title="@string/btn_account" />
                     <item
                         android:id="@+id/item_nav_logout"
+                        android:checked="false"
                         android:icon="@drawable/ic_logout"
                         android:title="@string/btn_logout" />
                 </group>

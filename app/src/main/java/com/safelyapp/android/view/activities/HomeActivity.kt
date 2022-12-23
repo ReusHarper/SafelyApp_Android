@@ -5,26 +5,22 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Gravity
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.*
-import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityHomeBinding
 import com.safelyapp.android.view.fragments.*
-import kotlin.system.exitProcess
-
 
 enum class ProviderType {
     BASIC,
@@ -39,6 +35,7 @@ class HomeActivity : AppCompatActivity() {
         const val REQUEST_CODE_LOCATION = 0
     }
 
+    // ========== General ==========
     private lateinit var binding: ActivityHomeBinding
 
     // ========== Elements ==========
@@ -85,9 +82,6 @@ class HomeActivity : AppCompatActivity() {
         drawer_layout = binding.homeDrawerLayout
         nav_menu_side = binding.navMenuSide
 
-        // Limpieza del stack de fragments
-        //getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         // Observacion de bottom menu
         bottomMenu()
 
@@ -104,14 +98,6 @@ class HomeActivity : AppCompatActivity() {
 
         // Observacion de bottom menu
         bottomMenu()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onBackPressed() {
@@ -146,16 +132,26 @@ class HomeActivity : AppCompatActivity() {
         // Cambio entre fragments dependiendo de la seleccion desde el bar menu
         nav_menu_bottom.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.item_fragment_map -> replaceFragment(mapsFragment)
-                R.id.item_fragment_group -> replaceFragment(groupsFragment)
-                R.id.item_fragment_devices -> replaceFragment(devicesFragment)
-
+                R.id.item_fragment_map -> {
+                    //replaceFragment(mapsFragment)
+                    supportFragmentManager.commit {
+                        replace<MapsFragment>(R.id.fragment_container)
+                    }
+                }
+                R.id.item_fragment_group -> {
+                    supportFragmentManager.commit {
+                        replace<GroupsFragment>(R.id.fragment_container)
+                    }
+                }
+                R.id.item_fragment_devices -> {
+                    supportFragmentManager.commit {
+                        replace<DevicesFragment>(R.id.fragment_container)
+                    }
+                }
                 else -> {
-                    showAlert(
-                        "Error de sistema",
-                        "Ha ocurrido un problema con la vista actual, por favor reintente de nuevo.",
-                        "Aceptar"
-                    )
+                    supportFragmentManager.commit {
+                        replace<MapsFragment>(R.id.fragment_container)
+                    }
                 }
             }
             true
@@ -171,7 +167,7 @@ class HomeActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    // Sustitucion del fragment por los del menu
+    // Sustitucion del fragment por los del menu lateral
     internal fun menuFragment() {
         fragmentTransaction = supportFragmentManager.beginTransaction()
 
@@ -182,12 +178,13 @@ class HomeActivity : AppCompatActivity() {
         nav_menu_side.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.item_nav_home -> {
-                    replaceFragment(mapsFragment)
+                    supportFragmentManager.commit {
+                        replace<MapsFragment>(R.id.fragment_container)
+                        setReorderingAllowed(true)
+                    }
                     nav_menu_bottom.visibility = View.VISIBLE
                 }
                 R.id.item_nav_medical -> {
-                    //replaceFragment(medicalFragment)
-
                     supportFragmentManager.commit {
                         replace<MedicalHistoryFragment>(R.id.fragment_container)
                         setReorderingAllowed(true)
@@ -195,26 +192,13 @@ class HomeActivity : AppCompatActivity() {
                     }
                     nav_menu_bottom.visibility = View.GONE
                 }
-                R.id.item_nav_code -> {
-                    //replaceFragment(codeSOSFragment)
-
-                    supportFragmentManager.commit {
-                        replace<CodeSosFragment>(R.id.fragment_container)
-                        setReorderingAllowed(true)
-                        addToBackStack("code_sos")
-                    }
-                    nav_menu_bottom.visibility = View.GONE
-                }
                 R.id.item_nav_profile -> {
-                    //replaceFragment(accountFragment)
                     supportFragmentManager.commit {
                         replace<AccountFragment>(R.id.fragment_container)
                         setReorderingAllowed(true)
                         addToBackStack("account")
                     }
-
                     nav_menu_bottom.visibility = View.GONE
-                    //addToBackStack("signup")
                 }
                 R.id.item_nav_logout -> {
                     // Se limpian las credencias de sesion
@@ -236,14 +220,14 @@ class HomeActivity : AppCompatActivity() {
                     )
                 }
             }
+            // Una vez se seleccione una opcion, el menu se debera ocultar
             sideScrolling()
             true
         }
-
     }
 
     // Desplazamiento de menu lateral
-    private fun sideScrolling() {
+    internal fun sideScrolling() {
         if (!drawer_layout.isDrawerOpen(Gravity.LEFT)) {
             drawer_layout.openDrawer(Gravity.LEFT)
         }

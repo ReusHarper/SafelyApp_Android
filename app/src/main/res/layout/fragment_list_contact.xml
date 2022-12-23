@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.GroupsFragment">
+    tools:context=".view.fragments.ListContactFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_left"
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_top_center"
@@ -77,30 +77,30 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
 
-    <TextView
-        android:id="@+id/title_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_groups"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top" />
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_contacts"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top_center"/>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top"
+        app:layout_constraintVertical_bias="1.0"
+        tools:itemCount="10" />
+
+    <TextView
+        android:id="@+id/tv_without_contacts"
+        android:layout_width="0sp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_whithout_contacts"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+        app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

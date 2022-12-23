@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragments.GroupsFragment">
+    tools:context=".view.fragments.ListAddFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_left"
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.14" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_bottom_center"
@@ -79,28 +79,76 @@
 
     <TextView
         android:id="@+id/title_account"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/title_groups"
-        android:textSize="30sp"
+        android:text="@string/title_send_email"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
         app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:hint="@string/text_email"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top_center"
+        app:layout_constraintVertical_bias="0.04">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_email_primary"
+            android:drawablePadding="12dp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1">
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_send"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
-        app:layout_constraintStart_toEndOf="@+id/guideline_vertical_left"
-        app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top_center"/>
+        android:background="@drawable/custom_button_gradient"
+        android:onClick="click"
+        android:text="@string/btn_send"
+        android:textSize="12sp"
+        android:theme="@style/buttonsFull"
+        app:icon="@drawable/ic_send"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_left_quarter"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+        app:layout_constraintTop_toBottomOf="@+id/til_email" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_button_gradient"
+        android:onClick="click"
+        android:text="@string/btn_cancel"
+        android:textSize="12sp"
+        android:theme="@style/buttonsFull"
+        app:icon="@drawable/ic_cancel"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_right_quarter"
+        app:layout_constraintTop_toBottomOf="@+id/til_email" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

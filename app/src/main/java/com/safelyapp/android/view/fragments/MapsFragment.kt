@@ -31,7 +31,7 @@ import com.safelyapp.android.databinding.FragmentMapsBinding
 import com.safelyapp.android.view.activities.HomeActivity
 
 
-class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
+class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // ========== General ==========
     private var _binding: FragmentMapsBinding? = null
@@ -57,7 +57,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     // ========== Data Google ==========
     private lateinit var googleMap: GoogleMap
     private lateinit var uiSettings: UiSettings
-    private var aniPosition: Boolean = false
+    internal var aniPosition: Boolean = false
     private var typeMap: Int = 0
 
     // ========== Ciclo de vida ==========
@@ -75,34 +75,12 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         btn_map = binding.btnTypemap
         btn_marker = binding.btnMarker
         drawer_layout = binding.mapsDrawerLayout
-        //nav_view = binding.mapsNav
 
         // Obtencion de geolocalizacion actual
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         getMap(savedInstanceState)
         return binding.root
-    }
-
-    // Vinculacion de datos entre el Fragment actual con el Parent Activity (HomeActivity)
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        // Si se necesita recibir datos del Child Fragment:
-        /*
-        if (context is MapsFragmentComunicate)
-            activityContainer = context
-        else throw RuntimeException(
-            context.toString() + " debe implementar el contexto MapsFragmentComunicate"
-        )
-        */
-    }
-
-    // Desvinculacion de datos entre el Fragment actual con el Parent Activity (HomeActivity)
-    override fun onDetach() {
-        super.onDetach()
-
-        //activityContainer = null
     }
 
     override fun onResume() {
@@ -233,7 +211,7 @@ class MapsFragment : Fragment(R.layout.fragment_maps), OnMapReadyCallback {
         if (!aniPosition)
             animationCamera(coordinate, 3000, 18f)
         else
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 18f))
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinate, 16f))
     }
 
     fun setLocation(location: Location) { lastLocation = location }

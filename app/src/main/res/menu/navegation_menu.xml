@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <group
         android:checkableBehavior="single">
         <item
             android:id="@+id/item_fragment_map"
+            android:checked="true"
             android:icon="@drawable/ic_location"
             android:title="@string/icon_location"/>
         <item
             android:id="@+id/item_fragment_group"
+            android:checked="false"
             android:icon="@drawable/ic_group_add"
             android:title="@string/icon_group_add"/>
         <item
             android:id="@+id/item_fragment_devices"
+            android:checked="false"
             android:icon="@drawable/ic_devices"
             android:title="@string/icon_devices"/>
     </group>
