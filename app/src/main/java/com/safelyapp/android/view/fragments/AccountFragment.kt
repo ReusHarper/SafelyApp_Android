@@ -151,6 +151,7 @@ class AccountFragment : Fragment() {
     private fun setData() {
         db.collection("users").document((activity as HomeActivity).email).set(
             mapOf(
+                "email" to (activity as HomeActivity).email,
                 "provider" to (activity as HomeActivity).providerType,
                 "name" to txt_name.text.toString(),
                 "address" to txt_direction.text.toString(),
@@ -178,7 +179,6 @@ class AccountFragment : Fragment() {
             updateData()
     }
 
-    // Retorno al fragment principal (mapsFragment)
     private fun cancel() {
         btn_cancel.setOnClickListener {
             returnHome()
@@ -187,7 +187,7 @@ class AccountFragment : Fragment() {
 
     // Regreso a fragmento de inicio (MapsFragment)
     private fun returnHome() {
-        getParentFragmentManager()?.popBackStack()
+        parentFragmentManager.popBackStack()
         (activity as HomeActivity).nav_menu_bottom.visibility = View.VISIBLE
     }
 
@@ -195,13 +195,11 @@ class AccountFragment : Fragment() {
     private fun getData() {
         db.collection("users").document((activity as HomeActivity).email).get()
             .addOnSuccessListener { value ->
-                txt_name.setText(value.get("name") as String?)
-                txt_direction.setText(value.get("address") as String?)
-                txt_phone.setText(value.get("phone") as String?)
+                txt_name.setText(value.get("name") as? String?:"")
+                txt_direction.setText(value.get("address") as? String?:"")
+                txt_phone.setText(value.get("phone") as? String?:"")
                 setImageProfile(value.get("img_profile") as String?)
             }
-
-        //Toast.makeText(requireContext(), "url: ${url_img_profile.toString()}", Toast.LENGTH_SHORT).show()
     }
 
     private fun setImageProfile(url: String?) {

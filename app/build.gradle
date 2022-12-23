@@ -54,6 +54,7 @@ dependencies {
     // Versions
     def v_core = "1.9.0"
     def v_activity = "1.6.1"
+    def v_coroutines = "1.6.4"
     def v_espressoCore = "3.5.0"
     def v_appCompat = "1.5.1"
     def v_materialDesign = "1.7.0"
@@ -90,8 +91,15 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$v_lifecycle"
     implementation "androidx.drawerlayout:drawerlayout:$v_drawer_layout"
     implementation "androidx.legacy:legacy-support-v4:$v_legacy"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$v_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$v_coroutines"
+
+    // Livecycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$v_lifecycle_livedata"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$v_lifecycle_viewmodel"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$v_lifecycle_viewmodel"
 
     // Material Design 3
     implementation "com.google.android.material:material:$v_materialDesign"

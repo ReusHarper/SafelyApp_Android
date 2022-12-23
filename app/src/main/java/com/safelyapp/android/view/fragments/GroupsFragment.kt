@@ -58,31 +58,14 @@ class GroupsFragment : Fragment(R.layout.fragment_groups) {
     override fun onStart() {
         super.onStart()
 
-        /*
-        parentFragmentManager.commit {
-            replace<MedicalHistoryFragment>(R.id.fragment_container)
-            setReorderingAllowed(true)
-            addToBackStack("medical_history")
-        }
-
-        */
-
         val adapter = TabsGroupsAdapter(parentFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = groupsArray[position]
         }.attach()
-
     }
 
     // ========== Metodos propios ==========
-    private fun observer() {
-        selectTab()
-    }
-
-    private fun selectTab() {
-
-    }
 
 }
