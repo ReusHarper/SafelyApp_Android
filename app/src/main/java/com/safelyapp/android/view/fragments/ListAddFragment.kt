@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.safelyapp.android.databinding.FragmentListAddBinding
 import com.safelyapp.android.view.activities.HomeActivity
-import com.safelyapp.android.view.data.RequestUser
+import com.safelyapp.android.view.data.User
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
@@ -24,7 +24,7 @@ class ListAddFragment : Fragment() {
     // ========== General ==========
     private var _binding: FragmentListAddBinding? = null
     private val binding get() = _binding!!
-    private lateinit var user: RequestUser
+    private lateinit var user: User
 
     // ========== Elements ==========
     private lateinit var txt_email: TextInputEditText
@@ -72,7 +72,8 @@ class ListAddFragment : Fragment() {
 
     // Obtencion de datos con corrutinas
     private fun getUserDataContact() {
-        var userCurrent: RequestUser?
+        var userCurrent: User?
+
         lifecycleScope.launch(Dispatchers.IO){
             // Consulta de usuario en el servidor de firestore, mientras se emplee el metodo await
             // el objeto userCurrent no sera inicializado y por lo tanto no se continuara con el
@@ -87,7 +88,7 @@ class ListAddFragment : Fragment() {
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), "Error de respuesta desde el servidor", Toast.LENGTH_SHORT).show()
                 }
-                .await().toObject(RequestUser::class.java)
+                .await().toObject(User::class.java)
 
             withContext(Dispatchers.Main)  {
                 if (userCurrent != null) {
@@ -96,7 +97,7 @@ class ListAddFragment : Fragment() {
                     Toast.makeText(requireContext(), "Invitación enviada con éxito", Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    user = RequestUser("Unkown", "Unkown")
+                    user = User("Unkown", "Unkown")
                     Toast.makeText(requireContext(), "El usuario ingresado no existe", Toast.LENGTH_SHORT).show()
                 }
             }

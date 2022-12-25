@@ -1,6 +1,6 @@
 package com.safelyapp.android.view.data
 
-data class RequestUser(
+data class User(
     val email: String = "",
-    val name: String = ""
+    val name: String? = ""
 )

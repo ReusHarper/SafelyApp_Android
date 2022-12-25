@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/secondary_500">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_left"
@@ -92,7 +93,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left_center"
         app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top"
         app:layout_constraintVertical_bias="0.0"
-        tools:text="Título" />
+        tools:text="@string/tv_username" />
 
     <TextView
         android:id="@+id/tv_email"
@@ -104,6 +105,6 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left_center"
         app:layout_constraintTop_toTopOf="@+id/guideline_horizontal_top_center"
-        tools:text="Género" />
+        tools:text="@string/tv_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

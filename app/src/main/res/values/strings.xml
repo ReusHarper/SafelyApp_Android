@@ -52,4 +52,6 @@
     <string name="text_whithout_request">Vacío</string>
     <string name="btn_accept">Aceptar</string>
     <string name="btn_reject">Rechazar</string>
+    <string name="tv_username">Username</string>
+    <string name="tv_email">account@mail.com</string>
 </resources>
