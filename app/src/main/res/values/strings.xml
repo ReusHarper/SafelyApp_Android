@@ -49,9 +49,10 @@
     <string name="title_send_email">Ingresa una dirección de correo electrónico para enviar una solicitud de contacto</string>
     <string name="btn_send">Enviar</string>
     <string name="text_whithout_contacts">Aún no hay contactos registrados</string>
-    <string name="text_whithout_request">Vacío</string>
+    <string name="text_whithout_request">Aún no hay invitaciones</string>
     <string name="btn_accept">Aceptar</string>
     <string name="btn_reject">Rechazar</string>
     <string name="tv_username">Username</string>
     <string name="tv_email">account@mail.com</string>
+    <string name="btn_delete">Eliminar</string>
 </resources>

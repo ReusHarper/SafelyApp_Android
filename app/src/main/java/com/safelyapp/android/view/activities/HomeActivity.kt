@@ -5,7 +5,10 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Email
+import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
@@ -13,13 +16,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityHomeBinding
+import com.safelyapp.android.view.data.User
 import com.safelyapp.android.view.fragments.*
 
 enum class ProviderType {
@@ -37,6 +43,7 @@ class HomeActivity : AppCompatActivity() {
 
     // ========== General ==========
     private lateinit var binding: ActivityHomeBinding
+    internal val db = FirebaseFirestore.getInstance()
 
     // ========== Elements ==========
     internal lateinit var nav_menu_bottom: BottomNavigationView
@@ -53,6 +60,11 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var medicalFragment: MedicalHistoryFragment
     private lateinit var codeSOSFragment: CodeSosFragment
     private lateinit var accountFragment: AccountFragment
+
+    private lateinit var listContactFragment: ListContactFragment
+    private lateinit var listAddFragment: ListAddFragment
+    private lateinit var listRequestFragment: ListRequestFragment
+
 
     private lateinit var fragmentManager: FragmentManager
     private lateinit var fragmentTransaction: FragmentTransaction
@@ -75,7 +87,9 @@ class HomeActivity : AppCompatActivity() {
         medicalFragment = MedicalHistoryFragment()
         codeSOSFragment = CodeSosFragment()
         accountFragment = AccountFragment()
-
+        listContactFragment = ListContactFragment()
+        listAddFragment = ListAddFragment()
+        listRequestFragment = ListRequestFragment()
 
         // Control y manejo de los elementos
         nav_menu_bottom = binding.navMenu
@@ -271,5 +285,4 @@ class HomeActivity : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-
 }

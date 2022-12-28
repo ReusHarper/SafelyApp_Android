@@ -1,14 +1,13 @@
 
 package com.safelyapp.android.view.fragments
 
-import android.app.DownloadManager.Request
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,8 +15,10 @@ import com.google.firebase.firestore.SetOptions
 import com.safelyapp.android.databinding.FragmentListAddBinding
 import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.data.User
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class ListAddFragment : Fragment() {
 
@@ -25,12 +26,12 @@ class ListAddFragment : Fragment() {
     private var _binding: FragmentListAddBinding? = null
     private val binding get() = _binding!!
     private lateinit var user: User
+    private val db = FirebaseFirestore.getInstance()
 
     // ========== Elements ==========
     private lateinit var txt_email: TextInputEditText
     private lateinit var btn_send: Button
     private lateinit var btn_cancel: Button
-    private val db = FirebaseFirestore.getInstance()
 
     // ========== Ciclo de vida ==========
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +96,7 @@ class ListAddFragment : Fragment() {
                     user = userCurrent!!
                     sendResquestContact()
                     Toast.makeText(requireContext(), "Invitación enviada con éxito", Toast.LENGTH_SHORT).show()
+                    txt_email.setText("")
                 }
                 else {
                     user = User("Unkown", "Unkown")
@@ -109,10 +111,12 @@ class ListAddFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             // Envio de invitacion al usuario especificado mediate su correo
             if (!user.email.equals("Unkown")) {
+                val emailWithCorrectFormat = replaceFormatEmail((activity as HomeActivity).email)
+
                 db.collection("request").document(user.email)
                     .set(
                         mapOf(
-                            "email_${(activity as HomeActivity).email}" to (activity as HomeActivity).email
+                            "email_$emailWithCorrectFormat" to (activity as HomeActivity).email
                         ), SetOptions.merge()
                     )
             }
@@ -123,6 +127,11 @@ class ListAddFragment : Fragment() {
     private fun returnHome() {
         parentFragmentManager.popBackStack()
         (activity as HomeActivity).nav_menu_bottom.visibility = View.VISIBLE
+    }
+
+    // Cambio de caracter especial punto (.) por guion bajo (_)
+    private fun replaceFormatEmail(email: String): String {
+        return email.replace(".", "_")
     }
 
 }

@@ -148,6 +148,17 @@ class AccountFragment : Fragment() {
         }
     }
 
+    // Consulta de informacion del usuario desde el servidor de Firestore
+    private fun getData() {
+        db.collection("users").document((activity as HomeActivity).email).get()
+            .addOnSuccessListener { value ->
+                txt_name.setText(value.get("name") as? String?:"")
+                txt_direction.setText(value.get("address") as? String?:"")
+                txt_phone.setText(value.get("phone") as? String?:"")
+                setImageProfile(value.get("img_profile") as String?)
+            }
+    }
+
     private fun setData() {
         db.collection("users").document((activity as HomeActivity).email).set(
             mapOf(
@@ -189,17 +200,6 @@ class AccountFragment : Fragment() {
     private fun returnHome() {
         parentFragmentManager.popBackStack()
         (activity as HomeActivity).nav_menu_bottom.visibility = View.VISIBLE
-    }
-
-    // Consulta de informacion del usuario desde el servidor de Firestore
-    private fun getData() {
-        db.collection("users").document((activity as HomeActivity).email).get()
-            .addOnSuccessListener { value ->
-                txt_name.setText(value.get("name") as? String?:"")
-                txt_direction.setText(value.get("address") as? String?:"")
-                txt_phone.setText(value.get("phone") as? String?:"")
-                setImageProfile(value.get("img_profile") as String?)
-            }
     }
 
     private fun setImageProfile(url: String?) {

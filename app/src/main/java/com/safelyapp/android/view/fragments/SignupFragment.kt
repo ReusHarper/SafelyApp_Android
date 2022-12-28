@@ -9,18 +9,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.FragmentSignupBinding
+import com.safelyapp.android.view.Database.DbContacts
 import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.activities.ProviderType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignupFragment : Fragment(R.layout.fragment_signup) {
 
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var firebaseAuth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
+    private val dbContacts = DbContacts()
+
     private lateinit var buttonLogin: Button
     private lateinit var buttonSignUp: Button
 
@@ -93,7 +101,12 @@ class SignupFragment : Fragment(R.layout.fragment_signup) {
     private fun createAccount(email: String, pass: String) {
         firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
             if (it.isSuccessful) {
-                showHome(it.result.user!!.email!!, ProviderType.BASIC)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    dbContacts.setUserInitialData(email)
+                    withContext(Dispatchers.Main) {
+                        showHome(it.result.user!!.email!!, ProviderType.BASIC)
+                    }
+                }
             } else {
                 showAlert("Error", "Se ha producido un error autenticando al usuario", "Aceptar")
             }
