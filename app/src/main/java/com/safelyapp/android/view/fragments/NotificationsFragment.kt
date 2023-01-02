@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FieldPath
 import com.safelyapp.android.databinding.FragmentNotificationsBinding
 import com.safelyapp.android.view.Database.DbContacts
 import com.safelyapp.android.view.activities.HomeActivity
@@ -55,6 +54,18 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
         super.onStart()
 
         getNotifications()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Si se regresa a la vista de notificaciones, se debera reiniciar el recycler view actual
+        // para evitar notificaciones duplicadas
+        if (listDataUsers.isNotEmpty()) {
+            listDataUsers.clear()
+            notifyAdapter.notifyDataSetChanged()
+            viewMessageListNotifications()
+        }
     }
 
     // ========== Metodos propios ==========
@@ -103,10 +114,8 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
                 if (listNotificationsRequestCurrent.isNotEmpty()) {
                     listEmailUsers = listNotificationsRequestCurrent
 
-                    for (user in listEmailUsers) {
-                        Log.e("EMAILS_NOW", user)
+                    for (user in listEmailUsers)
                         getNotifyData(user)
-                    }
                 }
                 viewListNotifications()
             }
