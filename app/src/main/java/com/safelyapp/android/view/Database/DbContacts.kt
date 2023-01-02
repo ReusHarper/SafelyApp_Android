@@ -61,18 +61,20 @@ open class DbContacts {
     }
 
     suspend fun getListUsers(context: Context, path: String, document: String): List<String>{
-        var listEmailUsersCurrent: List<String> = listOf()
+        var listCurrent: MutableList<String> = mutableListOf()
 
         db.collection(path).document(document).get()
-            .addOnSuccessListener { listEmails ->
-                if (listEmails.data != null)
-                    listEmailUsersCurrent = listEmails.data!!.map { it.value as String }
+            .addOnSuccessListener { listItems ->
+                if (listItems.data != null)
+                    //listCurrent.add(listCurrent.size, listItems.data.toString())
+                    //Log.e("EMAIL_ITEM", listCurrent.get(listCurrent.size - 1))
+                    listCurrent = listItems.data!!.map  { it.value as String }.toMutableList()
             }
             .addOnFailureListener {
                 Toast.makeText(context, "Error de respuesta desde el servidor", Toast.LENGTH_SHORT).show()
             }
             .await()
 
-        return listEmailUsersCurrent
+        return listCurrent.toList()
     }
 }

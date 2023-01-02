@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.safelyapp.android.databinding.FragmentListAddBinding
+import com.safelyapp.android.view.Database.DbContacts
 import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.data.User
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +28,7 @@ class ListAddFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var user: User
     private val db = FirebaseFirestore.getInstance()
+    private val dbContacts = DbContacts()
 
     // ========== Elements ==========
     private lateinit var txt_email: TextInputEditText
@@ -94,7 +96,7 @@ class ListAddFragment : Fragment() {
             withContext(Dispatchers.Main)  {
                 if (userCurrent != null) {
                     user = userCurrent!!
-                    sendResquestContact()
+                    sendRequestContact()
                     Toast.makeText(requireContext(), "Invitación enviada con éxito", Toast.LENGTH_SHORT).show()
                     txt_email.setText("")
                 }
@@ -107,18 +109,23 @@ class ListAddFragment : Fragment() {
     }
 
     // Envio de invitacion
-    private fun sendResquestContact() {
+    private fun sendRequestContact() {
         lifecycleScope.launch(Dispatchers.IO) {
             // Envio de invitacion al usuario especificado mediate su correo
             if (!user.email.equals("Unkown")) {
                 val emailWithCorrectFormat = replaceFormatEmail((activity as HomeActivity).email)
 
-                db.collection("request").document(user.email)
-                    .set(
+                lifecycleScope.launch(Dispatchers.IO) {
+                    /*
+                    db.collection("request").document(user.email).set(
                         mapOf(
                             "email_$emailWithCorrectFormat" to (activity as HomeActivity).email
                         ), SetOptions.merge()
-                    )
+                    )*/
+
+                    dbContacts.addRegister("request", user.email , "email_$emailWithCorrectFormat", (activity as HomeActivity).email)
+                    dbContacts.addRegister("notifications", user.email , "request_$emailWithCorrectFormat", (activity as HomeActivity).email)
+                }
             }
         }
     }

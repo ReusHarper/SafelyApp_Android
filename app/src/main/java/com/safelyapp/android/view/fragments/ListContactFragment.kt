@@ -82,10 +82,8 @@ class ListContactFragment : Fragment(), FragmentContactCallback {
                 if (listEmailUsersCurrent.isNotEmpty()) {
                     listEmailUsers = listEmailUsersCurrent
 
-                    for (user in listEmailUsers) {
-                        Log.e("USER_LIST_GROUP", user)
+                    for (user in listEmailUsersCurrent)
                         getUserData(user)
-                    }
                 }
                 viewListContact()
             }
@@ -105,7 +103,6 @@ class ListContactFragment : Fragment(), FragmentContactCallback {
             withContext(Dispatchers.Main) {
                 if (userCurrent != null) {
                     val lastPosition = listDataUsers.size
-                    Log.e("USER_ADD", "${userCurrent!!.email} position: $lastPosition")
                     listDataUsers.add(lastPosition, userCurrent!!)
                     userContactAdapter.notifyItemInserted(lastPosition)
                 }

@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -47,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
 
     // ========== Elements ==========
     internal lateinit var nav_menu_bottom: BottomNavigationView
+    internal lateinit var nav_notify_button: Button
     private lateinit var drawer_layout: DrawerLayout
     private lateinit var nav_menu_side: NavigationView
     internal lateinit var email: String
@@ -247,6 +249,17 @@ class HomeActivity : AppCompatActivity() {
         }
         else
             drawer_layout.closeDrawer(Gravity.LEFT)
+    }
+
+    internal fun notifications() {
+        fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        supportFragmentManager.commit {
+            replace<NotificationsFragment>(R.id.fragment_container)
+            setReorderingAllowed(true)
+            addToBackStack("notifications")
+        }
+        nav_menu_bottom.visibility = View.GONE
     }
 
     // Comprobacion de permisos

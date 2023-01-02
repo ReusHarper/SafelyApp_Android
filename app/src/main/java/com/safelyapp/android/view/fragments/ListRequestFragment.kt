@@ -29,7 +29,6 @@ class ListRequestFragment : Fragment(), FragmentRequestCallback {
     // ========== General ==========
     private var _binding: FragmentListRequestBinding? = null
     private val binding get() = _binding!!
-    private lateinit var user: User
     private lateinit var userRejectAdapter: UserRejectAdapter
     private val dbContacts = DbContacts()
 
@@ -90,10 +89,8 @@ class ListRequestFragment : Fragment(), FragmentRequestCallback {
                 if (listEmailUsersCurrent.isNotEmpty()) {
                     listEmailUsers = listEmailUsersCurrent
 
-                    for (user in listEmailUsers) {
-                        Log.e("USER", user)
+                    for (user in listEmailUsers)
                         getUserData(user)
-                    }
                 }
                 viewListContact()
             }
@@ -113,7 +110,6 @@ class ListRequestFragment : Fragment(), FragmentRequestCallback {
             withContext(Dispatchers.Main) {
                 if (userCurrent != null) {
                     val lastPosition = listDataUsers.size
-                    Log.e("USER_ADD", "${userCurrent!!.email} position: $lastPosition")
                     listDataUsers.add(lastPosition, userCurrent!!)
                     userRejectAdapter.notifyItemInserted(lastPosition)
                 }

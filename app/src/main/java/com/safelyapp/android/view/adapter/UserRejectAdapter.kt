@@ -34,18 +34,10 @@ class UserRejectAdapter(
         holder.tvUserName.text = users[position].name
 
         // Aceptacion de invitacion de contacto
-        holder.btn_accept.setOnClickListener {
-            //Manejar el click
-            Log.e("BTN_ACCEPT", "${users[position].email}")
-            listRequestFragment.addUserContact(users[position], position)
-        }
+        holder.btn_accept.setOnClickListener { listRequestFragment.addUserContact(users[position], position) }
 
         // Descarte de invitacion de contacto
-        holder.btn_reject.setOnClickListener {
-            //Manejar el click
-            Log.e("BTN_REJECT", "${users[position].email}")
-            listRequestFragment.rejectUserContact(users[position], position)
-        }
+        holder.btn_reject.setOnClickListener { listRequestFragment.rejectUserContact(users[position], position) }
     }
 
     override fun getItemCount(): Int = users.size

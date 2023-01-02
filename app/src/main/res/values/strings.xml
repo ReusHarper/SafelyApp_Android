@@ -55,4 +55,8 @@
     <string name="tv_username">Username</string>
     <string name="tv_email">account@mail.com</string>
     <string name="btn_delete">Eliminar</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="text_whithout_notifications">Bandeja vacía</string>
+    <string name="tv_notification">Notificacion</string>
+    <string name="tv_messagge">Mensaje</string>
 </resources>

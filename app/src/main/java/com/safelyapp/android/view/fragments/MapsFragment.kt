@@ -221,6 +221,7 @@ class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     // Observador de acciones de usuario
     private fun observer() {
         showMenu()
+        showNotifications()
         enableLocation()
         changeTypeMap()
         returnCurrentPosition()
@@ -265,6 +266,11 @@ class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
             } else
                 switch_menu = false
         }
+    }
+
+    // Despliega una ventana con las notificaciones
+    private fun showNotifications() {
+        btn_alerts.setOnClickListener { (activity as HomeActivity).notifications() }
     }
 
     //fun changeStyleMap(type: String) {

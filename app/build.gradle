@@ -49,8 +49,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
-
     // Versions
     def v_core = "1.9.0"
     def v_activity = "1.6.1"
@@ -68,6 +66,8 @@ dependencies {
     def v_firebase_auth = "21.1.0"
     def v_firebase_analytics = "21.2.0"
     def v_firebase_bom = "30.5.0"
+    def v_firebase_messaging = "23.1.1"
+    def v_firebase_storage = "20.1.0"
     def v_firebase_ui = "7.2.0"
     def v_maps = "18.1.0"
     def v_location = "21.0.1"
@@ -110,6 +110,8 @@ dependencies {
     implementation platform("com.google.firebase:firebase-bom:$v_firebase_bom")
     implementation "com.google.firebase:firebase-firestore-ktx"
     implementation "com.firebaseui:firebase-ui-storage:$v_firebase_ui"
+    implementation "com.google.firebase:firebase-storage-ktx:$v_firebase_storage"
+    implementation "com.google.firebase:firebase-messaging-ktx:$v_firebase_messaging"
 
     // Google Maps & Location
     implementation "com.google.android.gms:play-services-maps:$v_maps"
