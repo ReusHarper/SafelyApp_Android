@@ -1,12 +1,13 @@
 package com.safelyapp.android.view.Database
 
 import android.content.Context
+import android.location.Location
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.safelyapp.android.view.activities.HomeActivity
 import com.safelyapp.android.view.data.User
 import kotlinx.coroutines.tasks.await
 
@@ -31,16 +32,14 @@ open class DbContacts {
         db.collection(path).document(document).set(mapOf(key to value), SetOptions.merge()).await()
     }
 
-    suspend fun addLocationRegister(path: String, key: String, value: Map<String, String>) {
-        db.collection(path).get().addOnSuccessListener { documents ->
-            for (document in documents) {
-                //.set(mapOf(key to value), SetOptions.merge()).await()
-            }
-        }.await()
-    }
+    // Envio de localizacion actual del usuario hacia el contacto especificado mediante su email como notificacion en Firetore
+    suspend fun addLocationRegister(emailOwner: String, emailContact: String, field: String, location: Location) {
 
-    suspend fun updateRegister() {
+        val geopoint = GeoPoint(location.latitude, location.longitude)
+        val elements = listOf<Any>(emailOwner, geopoint)
+        val data = hashMapOf(field to elements)
 
+        db.collection("notifications").document(emailContact).set(data, SetOptions.merge()).await()
     }
 
     suspend fun deleteRegister(path: String, document: String, key: String) {

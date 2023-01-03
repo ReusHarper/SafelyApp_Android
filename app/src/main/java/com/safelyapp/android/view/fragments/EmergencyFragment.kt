@@ -85,6 +85,7 @@ class EmergencyFragment : Fragment() {
                     tv_count.text = count.toString()
 
                     if (count == 0) {
+                        sendLocation()
                         if (isVisible)
                             returnParentFragment()
                     }
@@ -93,15 +94,15 @@ class EmergencyFragment : Fragment() {
         }
     }
 
-    private fun getListContact() {
-        lifecycleScope.launch(Dispatchers.IO){
-            // Consulta de todos los contactos almacenados del usuario en el servidor de Firetore
-            listEmailContact = dbContacts.getListUsers(requireContext(), "contact", (activity as HomeActivity).email)
+    // Envio de ubicacion del usuario a sus contactos mediante Firestore
+    private suspend fun sendLocation() {
+        listEmailContact = dbContacts.getListUsers(requireContext(), "contact", (activity as HomeActivity).email)
+        if (listEmailContact.isNotEmpty()) {
+            for (email in listEmailContact) {
+                val emailWithCorrectFormat = replaceFormatEmail(email)
+                dbContacts.addLocationRegister((activity as HomeActivity).email, email , "alert_$emailWithCorrectFormat", location)
+            }
         }
-    }
-
-    private fun sendLocation() {
-        getListContact()
     }
 
     // Se muestra la vista del Fragment anterior (MapsFragment)
@@ -110,6 +111,11 @@ class EmergencyFragment : Fragment() {
             replace<MapsFragment>(R.id.fragment_container)
         }
         (activity as HomeActivity).nav_menu_bottom.visibility = View.VISIBLE
+    }
+
+    // Cambio de caracter especial punto (.) por guion bajo (_)
+    private fun replaceFormatEmail(email: String): String {
+        return email.replace(".", "_")
     }
 
 }
