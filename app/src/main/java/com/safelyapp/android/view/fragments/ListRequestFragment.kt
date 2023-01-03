@@ -32,12 +32,10 @@ class ListRequestFragment : Fragment(), FragmentRequestCallback {
     private lateinit var userRejectAdapter: UserRejectAdapter
     private val dbContacts = DbContacts()
 
-
     // ========== Elements ==========
     private var listEmailUsers: List<String> = listOf()
     private var listDataUsers: MutableList<User> = mutableListOf()
     private lateinit var listRequestContact: RecyclerView
-
 
     // ========== Ciclo de vida ==========
     override fun onCreateView(

@@ -59,4 +59,6 @@
     <string name="text_whithout_notifications">Bandeja vacía</string>
     <string name="tv_notification">Notificacion</string>
     <string name="tv_messagge">Mensaje</string>
+    <string name="btn_stop_emergency">Cancelar</string>
+    <string name="tv_count">5</string>
 </resources>

@@ -34,6 +34,12 @@
         <item name="colorSecondary">@color/secondary_500</item>
     </style>
 
+    <style name="buttonsTertiary">
+        <item name="colorPrimary">@color/tertiary_500</item>
+        <item name="colorOnPrimary">@color/tertiary_500</item>
+        <item name="colorSecondary">@color/neutral_dark</item>
+    </style>
+
     <!-- Animations. -->
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>

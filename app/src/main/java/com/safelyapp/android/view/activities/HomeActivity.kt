@@ -5,15 +5,12 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build.VERSION.SDK_INT
+import android.location.Location
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.util.Log
 import android.view.Gravity
-import android.view.Menu
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -26,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityHomeBinding
-import com.safelyapp.android.view.data.User
 import com.safelyapp.android.view.fragments.*
 
 enum class ProviderType {
@@ -53,6 +49,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var nav_menu_side: NavigationView
     internal lateinit var email: String
     internal lateinit var providerType: String
+    private lateinit var locationCurrent: Location
 
     // ========== Fragments ==========
     private lateinit var mapsFragment: MapsFragment
@@ -106,6 +103,8 @@ class HomeActivity : AppCompatActivity() {
             add<MapsFragment>(R.id.fragment_container)
             setReorderingAllowed(true)
             addToBackStack("maps")
+
+            //getLocationCurrent()
         }
     }
 

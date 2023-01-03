@@ -31,6 +31,14 @@ open class DbContacts {
         db.collection(path).document(document).set(mapOf(key to value), SetOptions.merge()).await()
     }
 
+    suspend fun addLocationRegister(path: String, key: String, value: Map<String, String>) {
+        db.collection(path).get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                //.set(mapOf(key to value), SetOptions.merge()).await()
+            }
+        }.await()
+    }
+
     suspend fun updateRegister() {
 
     }
@@ -66,8 +74,6 @@ open class DbContacts {
         db.collection(path).document(document).get()
             .addOnSuccessListener { listItems ->
                 if (listItems.data != null)
-                    //listCurrent.add(listCurrent.size, listItems.data.toString())
-                    //Log.e("EMAIL_ITEM", listCurrent.get(listCurrent.size - 1))
                     listCurrent = listItems.data!!.map  { it.value as String }.toMutableList()
             }
             .addOnFailureListener {

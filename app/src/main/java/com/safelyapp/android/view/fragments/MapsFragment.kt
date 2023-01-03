@@ -30,7 +30,6 @@ import com.safelyapp.android.R
 import com.safelyapp.android.databinding.FragmentMapsBinding
 import com.safelyapp.android.view.activities.HomeActivity
 
-
 class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // ========== General ==========
@@ -109,6 +108,22 @@ class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
         // Observador de acciones de usuario
         observer()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btn_emergency.setOnClickListener {
+            // Obtencion de una referencia al Fragment Emergency y llamada a su metodo getLastLocalition
+            val fragmentEmergency = EmergencyFragment()
+            fragmentEmergency.getLastLocation(lastLocation)
+
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragmentEmergency)
+            transaction.commit()
+
+            (activity as HomeActivity).nav_menu_bottom.visibility = View.GONE
+        }
     }
 
     // ========== Metodos propios ==========
@@ -202,7 +217,6 @@ class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
 
     // Generacion de marcador con la ubicacion actual del usuario
     private fun setMarker(currentPosition: LatLng) {
-
         coordinate = LatLng(currentPosition.latitude, currentPosition.longitude)
         val marker = MarkerOptions().position(coordinate).title("Posicion actual")
         googleMap.addMarker(marker)
@@ -221,6 +235,7 @@ class MapsFragment: Fragment(R.layout.fragment_maps), OnMapReadyCallback {
     // Observador de acciones de usuario
     private fun observer() {
         showMenu()
+        //sendEmergencyAlert()
         showNotifications()
         enableLocation()
         changeTypeMap()
