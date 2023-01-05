@@ -99,7 +99,7 @@ class EmergencyFragment : Fragment() {
         listEmailContact = dbContacts.getListUsers(requireContext(), "contact", (activity as HomeActivity).email)
         if (listEmailContact.isNotEmpty()) {
             for (email in listEmailContact) {
-                val emailWithCorrectFormat = replaceFormatEmail(email)
+                val emailWithCorrectFormat = replaceFormatEmail((activity as HomeActivity).email)
                 dbContacts.addLocationRegister((activity as HomeActivity).email, email , "alert_$emailWithCorrectFormat", location)
             }
         }

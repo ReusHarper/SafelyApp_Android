@@ -1,5 +1,6 @@
 package com.safelyapp.android.view.fragments
 
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.GeoPoint
 import com.safelyapp.android.databinding.FragmentNotificationsBinding
 import com.safelyapp.android.view.Database.DbContacts
 import com.safelyapp.android.view.activities.HomeActivity
@@ -34,8 +36,8 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
     private val dbContacts = DbContacts()
 
     // ========== Elements ==========
-    private var listEmailUsers: List<String> = listOf()
-    private var listDataNotifyRequest: MutableList<Notify> = mutableListOf()
+    private var listNotificationsRequest: List<String> = listOf()
+    private var listNotificationsAlerts: List<Any> = listOf()
     private var listDataUsers: MutableList<User> = mutableListOf()
     private lateinit var listNotifications: RecyclerView
 
@@ -70,8 +72,13 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
 
     // ========== Metodos propios ==========
     // Visualizacion de lista de peticion de contacto
-    private fun viewListNotifications() {
-        notifyAdapter = NotificationAdapter(this, requireContext(), listDataUsers, null)
+    private fun viewListNotifications(location: ArrayList<Double>?) {
+        if (location != null)
+            notifyAdapter = NotificationAdapter(this@NotificationsFragment, requireContext(), listDataUsers, location)
+        else {
+            var locationEmpty = arrayListOf<Double>()
+            notifyAdapter = NotificationAdapter(this@NotificationsFragment, requireContext(), listDataUsers, locationEmpty)
+        }
 
         // Muestreo de notificaciones
         listNotifications.layoutManager = LinearLayoutManager(requireContext())
@@ -90,6 +97,7 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
 
     private fun getNotifications() {
         var listNotificationsRequestCurrent: MutableList<String> = mutableListOf()
+        var listNotificationsAlertsCurrent: MutableList<Any> = mutableListOf()
 
         lifecycleScope.launch(Dispatchers.IO){
 
@@ -103,7 +111,11 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
                         if (field.startsWith("request_")) {
                             val value = document.get(field)
                             listNotificationsRequestCurrent.add(value.toString())
-                            //Log.e("EMAILS", listNotificationsRequestCurrent.get(listNotificationsRequestCurrent.size - 1))
+                        }
+
+                        else if (field.startsWith("alert_")) {
+                            val value = document.get(field) as List<Any>
+                            listNotificationsAlertsCurrent.add(value)
                         }
                     }
                 }
@@ -112,22 +124,52 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
             // Por cada notificacion se obtiene su informacion de contacto
             withContext(Dispatchers.Main)  {
                 if (listNotificationsRequestCurrent.isNotEmpty()) {
-                    listEmailUsers = listNotificationsRequestCurrent
+                    listNotificationsRequest = listNotificationsRequestCurrent
 
-                    for (user in listEmailUsers)
-                        getNotifyData(user)
+                    for (user in listNotificationsRequest)
+                        getNotifyData(user, null)
                 }
-                viewListNotifications()
+
+                if (listNotificationsAlertsCurrent.isNotEmpty()) {
+                    listNotificationsAlerts = listNotificationsAlertsCurrent
+
+                    for (field in listNotificationsAlerts) {
+                        val data = field as ArrayList<Any>
+                        val email = data[0] as String
+                        val location = getLocation(data[1] as GeoPoint)
+
+                        getNotifyData(email, location)
+                    }
+                }
+                //viewListNotifications()
             }
         }
     }
 
+    private fun getLocation(geoPoint: GeoPoint) : Location {
+        val latitude = geoPoint.latitude
+        val longitude = geoPoint.longitude
+        val location = Location("")
+
+        location.latitude = latitude
+        location.longitude = longitude
+
+        return location
+    }
+
     // Obtencion de la informacion de cada contacto
-    private fun getNotifyData(email: String) {
-        notifyAdapter = NotificationAdapter(this, requireContext(), listDataUsers, null)
+    private fun getNotifyData(email: String, location: Location?) {
+
         var userCurrent: User?
+        var locationArray: ArrayList<Double> = ArrayList()
+        if (location != null) {
+            locationArray.add(location.latitude)
+            locationArray.add(location.longitude)
+        }
 
         lifecycleScope.launch(Dispatchers.IO) {
+            notifyAdapter = NotificationAdapter(this@NotificationsFragment, requireContext(), listDataUsers, locationArray)
+
             // Consulta de los datos de cada contacto almacenados en el servidor de Firetore
             userCurrent = dbContacts.getDataUser(requireContext(), email)
 
@@ -138,7 +180,7 @@ class NotificationsFragment : Fragment(), FragmentNotificationsCallback {
                     listDataUsers.add(lastPosition, userCurrent!!)
                     notifyAdapter.notifyItemInserted(lastPosition)
                 }
-                viewListNotifications()
+                viewListNotifications(locationArray)
             }
         }
     }
