@@ -24,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.safelyapp.android.R
 import com.safelyapp.android.databinding.ActivityHomeBinding
 import com.safelyapp.android.view.fragments.*
+import kotlin.system.exitProcess
 
 enum class ProviderType {
     BASIC,
@@ -79,6 +80,9 @@ class HomeActivity : AppCompatActivity() {
         providerType = bundle?.getString("provider").toString()
         setup(email ?: "", providerType ?: "")
 
+        // Comprobacion de permisos
+        checkPermissions()
+
         // Control y manejo de cada Fragment
         mapsFragment = MapsFragment()
         groupsFragment = GroupsFragment()
@@ -105,6 +109,15 @@ class HomeActivity : AppCompatActivity() {
             addToBackStack("maps")
 
             //getLocationCurrent()
+        }
+    }
+
+    private fun checkPermissions() {
+        if (!isLocationPermissionGranted()) {
+            requestLocationPermission()
+            Log.e("PERMISOS", "DENEGADOS")
+        } else {
+            Log.e("PERMISOS", "ACEPTADOS")
         }
     }
 
@@ -274,6 +287,7 @@ class HomeActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
         ) {
+            Log.e("PERMISOS", "ALERT")
             showAlert(
                 "Permisos insuficientes",
                 "Para poder utilizar la aplicacion es necesario permitir la geolocalizacion. Ve a ajustes y habilita dicho permiso.",
