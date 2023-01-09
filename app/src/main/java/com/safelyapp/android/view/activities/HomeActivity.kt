@@ -171,11 +171,13 @@ class HomeActivity : AppCompatActivity() {
                         replace<GroupsFragment>(R.id.fragment_container)
                     }
                 }
+                /*
                 R.id.item_fragment_devices -> {
                     supportFragmentManager.commit {
                         replace<DevicesFragment>(R.id.fragment_container)
                     }
                 }
+                */
                 else -> {
                     supportFragmentManager.commit {
                         replace<MapsFragment>(R.id.fragment_container)

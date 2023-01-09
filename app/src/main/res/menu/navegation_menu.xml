@@ -13,10 +13,13 @@
             android:checked="false"
             android:icon="@drawable/ic_group_add"
             android:title="@string/icon_group_add"/>
+    </group>
+</menu>
+
+<!--
         <item
             android:id="@+id/item_fragment_devices"
             android:checked="false"
             android:icon="@drawable/ic_devices"
             android:title="@string/icon_devices"/>
-    </group>
-</menu>
+-->
