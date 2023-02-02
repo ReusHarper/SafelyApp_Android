@@ -200,7 +200,7 @@ En dado caso que se quiera utilizar alguna cuenta de prueba, se puede implementa
 	
 	.container{
 		width: 100%;
-	 	height: 400px;
+	 	height: 440px;
 	  	display: flex;
 	    justify-content: space-between;
 	}
@@ -212,121 +212,121 @@ En dado caso que se quiera utilizar alguna cuenta de prueba, se puede implementa
 	}
 	
 	.container__img--login {
-		background: url(./resources/img/pantallas/login.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/login.png);
 		background-position: center center;
 		background-size: 100%;
 	}
 
     .container__img--logindark {
-		background: url(./resources/img/pantallas/login_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/login_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--signup {
-		background: url(./resources/img/pantallas/signup.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/signup.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--signupdark {
-		background: url(./resources/img/pantallas/signup_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/signup_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--account {
-		background: url(./resources/img/pantallas/account.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/account.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--accountdark {
-		background: url(./resources/img/pantallas/account_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/account_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--add {
-		background: url(./resources/img/pantallas/add.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/add.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--adddark {
-		background: url(./resources/img/pantallas/add_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/add_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--contacts {
-		background: url(./resources/img/pantallas/contacts.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/contacts.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--contactsdark {
-		background: url(./resources/img/pantallas/contacts_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/contacts_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--maps {
-		background: url(./resources/img/pantallas/maps.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--mapsdark {
-		background: url(./resources/img/pantallas/maps_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--maps3d {
-		background: url(./resources/img/pantallas/maps3d.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps3d.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--maps3ddark {
-		background: url(./resources/img/pantallas/maps3d_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps3d_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--notifications {
-		background: url(./resources/img/pantallas/notifications.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/notifications.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--notificationsdark {
-		background: url(./resources/img/pantallas/notifications_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/notifications_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--requests {
-		background: url(./resources/img/pantallas/requests.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/requests.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--requestsdark {
-		background: url(./resources/img/pantallas/requests_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/requests_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
 	
 	.container__img--sidemenu {
-		background: url(./resources/img/pantallas/sidemenu.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/sidemenu.png);
 		background-position: center center;
 		background-size: cover;
 	}
 
     .container__img--sidemenudark {
-		background: url(./resources/img/pantallas/sidemenu_dark.png);
+		background: url(https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/sidemenu_dark.png);
 		background-position: center center;
 		background-size: cover;
 	}
