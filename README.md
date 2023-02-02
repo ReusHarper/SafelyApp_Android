@@ -50,90 +50,92 @@ A continuación se muestra cada una de las pantallas que conforman a la aplicaci
 	Inicio de Sesión
 </div>
 
-<div class="container">
-	<img class="container__img container__img--login">
-    <img class="container__img container__img--logindark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/login.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/login_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Creación de cuenta
 </div>
 
-<div class="container">
-	<img class="container__img container__img--signup">
-    <img class="container__img container__img--signupdark">
-</div>
+
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/signup.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/signup_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Mapa 2D
 </div>
 
-<div class="container">
-	<img class="container__img container__img--maps">
-    <img class="container__img container__img--mapsdark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Mapa 3D
 </div>
 
-<div class="container">
-	<img class="container__img container__img--maps3d">
-    <img class="container__img container__img--maps3ddark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps3d.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/maps3d_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Notificaciones
 </div>
 
-<div class="container">
-	<img class="container__img container__img--notifications">
-    <img class="container__img container__img--notificationsdark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/notifications.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/notifications_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Menu lateral
 </div>
 
-<div class="container">
-	<img class="container__img container__img--sidemenu">
-    <img class="container__img container__img--sidemenudark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/sidemenu.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/sidemenu_dark.png" width="210" height="400">
+</p>
+
 
 <br><br>
 <div class="title">
 	Contactos
 </div>
 
-<div class="container">
-	<img class="container__img container__img--contacts">
-    <img class="container__img container__img--contactsdark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/contacts.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/contacts_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Añadir
 </div>
 
-<div class="container">
-	<img class="container__img container__img--add">
-    <img class="container__img container__img--adddark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/add.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/add_dark.png" width="210" height="400">
+</p>
 
 <br><br>
 <div class="title">
 	Solicitudes
 </div>
 
-<div class="container">
-	<img class="container__img container__img--requests">
-    <img class="container__img container__img--requestsdark">
-</div>
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/requests.png" width="210" height="400">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/requests_dark.png" width="210" height="400">
+</p>
 
 
 [Más información sobre de la propuesta visual](https://docs.google.com/presentation/d/1GldHZZU80CWDQWvX90tkmaZ1dej5sDvDBgK3R9N4z8s/edit?usp=sharing)
@@ -156,9 +158,9 @@ Un punto a destacar sobre ello es que actualmente en las estadística oficiales 
 
 Para este proyecto es posible crear una cuenta simplemente proporcionando una dirección de email así también como una contraseña. <br><br>
 
-<div class="container center">
-	<img class="container__img container__img--signup">
-</div>
+<p style="display: flex; justify-content: center;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/signup.png" width="210" height="400">
+</p>
 
 <div class="subtitle">
 	Pantalla de Sign up
@@ -181,7 +183,7 @@ En dado caso que se quiera utilizar alguna cuenta de prueba, se puede implementa
 - **Firebase Firestore:** Brinda soporte de Backend el cual fue nesario para poder almacenar información básica de cada usuario como su email, nombre, dirección, teléfono, imagen o fotografía personal y una lista de contactos.
 - **Lottie:** Se implemento con el fin de poder agregar imágenes y animaciones sencillas para las pantallas de carga (aunque por el momento no fueron agregadas debido a una falta de tiempo para su desarrollo, por lo que se planea lanzar una versión con estas herramientas más adelante).
 
-<style>
+<!-- <style>
 	.title, .subtitle {
 		font-size: 20px;
 		font-weight: 900;
@@ -334,4 +336,4 @@ En dado caso que se quiera utilizar alguna cuenta de prueba, se puede implementa
     .center {
         justify-content: center;
     }
-</style>
+</style> -->
