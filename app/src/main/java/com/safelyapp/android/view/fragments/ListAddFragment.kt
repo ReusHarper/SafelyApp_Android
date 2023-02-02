@@ -1,10 +1,13 @@
 
 package com.safelyapp.android.view.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -69,7 +72,7 @@ class ListAddFragment : Fragment() {
         }
 
         btn_cancel.setOnClickListener {
-            returnHome()
+            erraseEmail()
         }
     }
 
@@ -130,10 +133,11 @@ class ListAddFragment : Fragment() {
         }
     }
 
-    // Regreso a fragmento de inicio (MapsFragment)
-    private fun returnHome() {
-        parentFragmentManager.popBackStack()
-        (activity as HomeActivity).nav_menu_bottom.visibility = View.VISIBLE
+    // Borrado de texto
+    private fun erraseEmail() {
+        txt_email.setText("")
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(txt_email.windowToken, 0)
     }
 
     // Cambio de caracter especial punto (.) por guion bajo (_)
