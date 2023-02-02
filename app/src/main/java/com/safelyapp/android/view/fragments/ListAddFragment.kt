@@ -78,36 +78,53 @@ class ListAddFragment : Fragment() {
 
     // Obtencion de datos con corrutinas
     private fun getUserDataContact() {
-        var userCurrent: User?
 
-        lifecycleScope.launch(Dispatchers.IO){
-            // Consulta de usuario en el servidor de firestore, mientras se emplee el metodo await
-            // el objeto userCurrent no sera inicializado y por lo tanto no se continuara con el
-            // siguiente bloque de codigo
-            userCurrent = db.collection("users").document(txt_email.text.toString()).get()
-                .addOnSuccessListener { value ->
-                    if (value != null) {
-                        (value.get("email") as? String?)
-                        (value.get("name") as? String?)
+        // Si hay un texto agregado en la barra de busqueda de emails se procede con su busqueda
+        if (txt_email.text != null && txt_email.text!!.isNotEmpty()) {
+            var userCurrent: User?
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                // Consulta de usuario en el servidor de firestore, mientras se emplee el metodo await
+                // el objeto userCurrent no sera inicializado y por lo tanto no se continuara con el
+                // siguiente bloque de codigo
+                userCurrent = db.collection("users").document(txt_email.text.toString()).get()
+                    .addOnSuccessListener { value ->
+                        if (value != null) {
+                            (value.get("email") as? String?)
+                            (value.get("name") as? String?)
+                        }
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(),
+                            "Error de respuesta desde el servidor",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .await().toObject(User::class.java)
+
+                withContext(Dispatchers.Main) {
+                    if (userCurrent != null) {
+                        user = userCurrent!!
+                        sendRequestContact()
+                        Toast.makeText(
+                            requireContext(),
+                            "Invitación enviada con éxito",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        txt_email.setText("")
+                    } else {
+                        user = User("Unkown", "Unkown")
+                        Toast.makeText(
+                            requireContext(),
+                            "El usuario ingresado no existe",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(), "Error de respuesta desde el servidor", Toast.LENGTH_SHORT).show()
-                }
-                .await().toObject(User::class.java)
-
-            withContext(Dispatchers.Main)  {
-                if (userCurrent != null) {
-                    user = userCurrent!!
-                    sendRequestContact()
-                    Toast.makeText(requireContext(), "Invitación enviada con éxito", Toast.LENGTH_SHORT).show()
-                    txt_email.setText("")
-                }
-                else {
-                    user = User("Unkown", "Unkown")
-                    Toast.makeText(requireContext(), "El usuario ingresado no existe", Toast.LENGTH_SHORT).show()
-                }
             }
+        } else {
+            Toast.makeText(requireContext(), "Por favor ingrese un email.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -119,13 +136,6 @@ class ListAddFragment : Fragment() {
                 val emailWithCorrectFormat = replaceFormatEmail((activity as HomeActivity).email)
 
                 lifecycleScope.launch(Dispatchers.IO) {
-                    /*
-                    db.collection("request").document(user.email).set(
-                        mapOf(
-                            "email_$emailWithCorrectFormat" to (activity as HomeActivity).email
-                        ), SetOptions.merge()
-                    )*/
-
                     dbContacts.addRegister("request", user.email , "email_$emailWithCorrectFormat", (activity as HomeActivity).email)
                     dbContacts.addRegister("notifications", user.email , "request_$emailWithCorrectFormat", (activity as HomeActivity).email)
                 }
