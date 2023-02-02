@@ -106,6 +106,16 @@ A continuación se muestra cada una de las pantallas que conforman a la aplicaci
     <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/sidemenu_dark.png" width="210" height="400">
 </p>
 
+<br><br>
+<div class="title">
+	Cuenta
+</div>
+
+<p style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/account.png" width="225" height="500"/>
+    <img src="https://raw.githubusercontent.com/ReusHarper/SafelyApp_Android/main/resources/img/pantallas/account_dark.png" width="225" height="500"/>
+</p>
+
 
 <br><br>
 <div class="title">
