@@ -214,14 +214,14 @@ class HomeActivity : AppCompatActivity() {
                     }
                     nav_menu_bottom.visibility = View.VISIBLE
                 }
-                R.id.item_nav_medical -> {
-                    supportFragmentManager.commit {
-                        replace<MedicalHistoryFragment>(R.id.fragment_container)
-                        setReorderingAllowed(true)
-                        addToBackStack("medical_history")
-                    }
-                    nav_menu_bottom.visibility = View.GONE
-                }
+//                R.id.item_nav_medical -> {
+//                    supportFragmentManager.commit {
+//                        replace<MedicalHistoryFragment>(R.id.fragment_container)
+//                        setReorderingAllowed(true)
+//                        addToBackStack("medical_history")
+//                    }
+//                    nav_menu_bottom.visibility = View.GONE
+//                }
                 R.id.item_nav_profile -> {
                     supportFragmentManager.commit {
                         replace<AccountFragment>(R.id.fragment_container)
