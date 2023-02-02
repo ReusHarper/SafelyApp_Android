@@ -7,11 +7,6 @@
             android:checked="true"
             android:icon="@drawable/ic_home"
             android:title="@string/btn_home" />
-        <item
-            android:id="@+id/item_nav_medical"
-            android:checked="false"
-            android:icon="@drawable/ic_medical_information"
-            android:title="@string/btn_medical_history" />
     </group>
 
     <group android:checkableBehavior="single">
